@@ -1,12 +1,12 @@
 "use client"
+import Image from "next/image";
 import { useState } from "react";
 import FoodItemCard from "../Card/FoodItemCard";
-import Image from "next/image";
 
 const FoodItem1 = () => {
     const [isActive, setIsActive] = useState('FastFood');
     return (
-<section className="food-menu-section fix section-padding">
+    <section className="food-menu-section fix section-padding">
         <div className="burger-shape">
         <Image src="/assets/img/shape/burger-shape.png" alt="img" width={148} height={160}   />
         </div>

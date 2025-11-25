@@ -1806,7 +1806,6 @@ textarea.form-control:focus {
   font-family: var(--title-font);
   font-size: 20px;
   font-style: normal;
-  font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
   margin-bottom: 15px;
@@ -2090,7 +2089,7 @@ textarea.form-control:focus {
 }
 .social-profile .plus-btn {
   position: relative;
-  z-index: 2;
+  /* z-index: 2; */
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -2790,6 +2789,7 @@ input.main-search-input::placeholder {
 .modal .modal-content {
   position: relative;
   margin-top: 20px;
+  z-index:5000
 }
 .modal .modal-content .modal-header .btn-close {
   position: absolute;
@@ -8237,7 +8237,7 @@ input.main-search-input::placeholder {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 1;
+  /* z-index: 1; */
 }
 .dishes-card.style1:hover h3 {
   color: var(--white);
@@ -8772,7 +8772,7 @@ input.main-search-input::placeholder {
 }
 .dishes-thumb img {
   position: relative;
-  z-index: 2;
+  /* z-index: 2; */
 }
 @media (max-width: 500px) {
   .dishes-thumb img {
@@ -14012,4 +14012,48 @@ margin-bottom: 0 !important;
   background-color: #f8f9fa;
   border-color: #D4DCFF;
   padding: 15px 10px;
+}
+
+.swiper-slide .nav-item {
+  width: max-content;
+}
+
+.social-profile ul li span:hover {
+  background: var(--theme);
+  color: var(--white) !important;
+}
+
+.social-profile ul li span {
+  cursor:pointer;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 16px;
+  display: inline-block;
+  background: var(--white);
+  color: var(--title);
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  border-radius: 50%;
+  -moz-transition: all .4s ease-in-out;
+  -ms-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+}
+
+.model-overlay {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #151515;
+  z-index: 900;
+  top: 0;
+  opacity: 0;
+  visibility: hidden;
+  right: 0;
+}
+
+.model-overlay.overlay-open {
+  opacity: .8;
+  visibility: visible;
 }
