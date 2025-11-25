@@ -172,7 +172,7 @@ const Footer1 = () => {
                 </div>
             </div>
         </div>
-        <div className="footer-bottom">
+        {/* <div className="footer-bottom">
             <div className="container">
                 <div className="footer-wrapper d-flex align-items-center justify-content-between">
                     <p className="wow fadeInLeft" data-wow-delay=".3s">
@@ -192,7 +192,7 @@ const Footer1 = () => {
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> */}
     </footer>
     );
 };

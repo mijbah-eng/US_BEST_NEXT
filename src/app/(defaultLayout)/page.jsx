@@ -11,6 +11,7 @@ import Team1 from '../Components/Team/Team1';
 import Testimonial1 from '../Components/Testimonial/Testimonial1';
 import Blog1 from '../Components/Blog/Blog1';
 import Gallery1 from '../Components/Gallery/Gallery1';
+import Order from '../Components/Order/Order';
 
 const page = () => {
     return (
@@ -22,8 +23,7 @@ const page = () => {
             <BestSelling1></BestSelling1>
             <CtaBanner1></CtaBanner1>
             <FoodItem1></FoodItem1>
-            <Timer1></Timer1>
-            <Team1></Team1>
+            <Order></Order>
             <Testimonial1></Testimonial1>
             <Blog1></Blog1>
             <Gallery1></Gallery1>

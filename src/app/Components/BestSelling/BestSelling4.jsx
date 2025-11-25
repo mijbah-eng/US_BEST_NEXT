@@ -26,12 +26,12 @@ const BestSelling4 = () => {
                 <div className="title-area best-selling-title">
                     <div className="sub-title text-center wow fadeInUp" data-wow-delay="0.5s">
                     <Image className="me-1" src="/assets/img/icon/titleIcon.svg" alt="img" width={20} height={20}   />
-                        POPULAR DISHES<Image className="ms-1"
+                        Foods Cetagory<Image className="ms-1"
                             src="/assets/img/icon/titleIcon.svg" alt="img" width={20} height={20}   />
                     </div>
-                    <h2 className="title wow fadeInUp" data-wow-delay="0.7s">
+                    {/* <h2 className="title wow fadeInUp" data-wow-delay="0.7s">
                         Best selling Dishes
-                    </h2>
+                    </h2> */}
                 </div>
                 <div className="dishes-card-wrap style1 best-selling-area">
                 {foodItems.map((item, i) => (
@@ -48,6 +48,7 @@ const BestSelling4 = () => {
                             <span className="plus-btn"> <Link href="#"> <i className="bi bi-heart"></i></Link></span>
                             <ul>
                                 <li><Link href="/cart"><i className="bi bi-basket2"></i></Link></li>
+                                <li><Link href="/cart"><i class="bi bi-eye"></i></Link></li>
                             </ul>
                         </div>
                     </div>
