@@ -18,13 +18,13 @@ const roboto = Roboto({
 export const metadata = {
   title: {
     absolute: '',
-    default: 'Fresheat - Food & Restaurant NextJS Template',
-    template: '%s | Fresheat - Food & Restaurant NextJS Template',
+    default: 'US BEST',
+    template: '%s | US BEST',
   },
-  description: 'Fresheat - Food & Restaurant NextJS Template',
+  description: 'US BEST',
   openGraph: {
-    title: 'Fresheat - Food & Restaurant NextJS Template',
-    description: 'Fresheat - Food & Restaurant NextJS Template',
+    title: 'US BEST',
+    description: 'US BEST',
   },
 };
 
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="author" content="Themeservices" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
       </head>
       <body className={`${epilogue.variable} ${roboto.variable}`}>
         {children}
