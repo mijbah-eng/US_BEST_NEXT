@@ -3,7 +3,7 @@ import Link from "next/link";
 import basecatagories from "../../../../utility/config";
 import DropDown from "./DropDown";
 
-const megaMenu = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// const megaMenu = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Nav({ categories }) {
   return (
     <ul className="cs_nav_list fw-medium">
@@ -22,7 +22,7 @@ export default function Nav({ categories }) {
           <ul>
             <li>
               <div className="row mega-menu">
-                {categories.length === 0 ? (
+                {categories?.length === 0 ? (
                   <p>Loading categories...</p>
                 ) : (
                   categories.map((category, index) => {
@@ -64,12 +64,12 @@ export default function Nav({ categories }) {
                                     {category.categoryName} <span></span>
                                 </h4>
                                 <div className="mega-menu-desc">
-                                  {category.description
+                                  {category?.description
                                     ? category.description
                                         .split(" ")
                                         .slice(0, 7)
                                         .join(" ") +
-                                      (category.description.split(" ").length >
+                                      (category?.description?.split(" ")?.length >
                                       7
                                         ? "..."
                                         : "")
