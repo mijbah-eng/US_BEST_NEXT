@@ -23,6 +23,7 @@ export default function Header1({ variant }) {
   const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const dispatch = useDispatch();
+console.log(cartItems);
 
   const handeltrack = async () => {
     const result = await dispatch(fetchMenu()).unwrap();
@@ -150,7 +151,7 @@ export default function Header1({ variant }) {
                     className="cart-trigger cart-icon"
                   >
                     <i className="bi bi-cart"></i>
-                    {cartItems?.length > 0 && (
+                    {/* {cartItems?.length > 0 && (
                         <span
                           style={{
                             position: "absolute",
@@ -167,9 +168,9 @@ export default function Header1({ variant }) {
                             fontWeight: 500,
                           }}
                         >
-                          {cartItems?.length}
+                          {cartItems?.length !== undefined ? cartItems?.length : "0"}
                         </span>
-                      )}
+                      )} */}
                   </a>
                   <a
                     onClick={() => setToggle(!toggle)}
