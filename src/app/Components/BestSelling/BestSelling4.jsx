@@ -62,7 +62,7 @@ const BestSelling4 = () => {
                                         <div className={`tab-pane ${isActive === 'FastFood' ? 'active' : ''}`} id="pills-FastFood" role="tabpanel"
                                                 aria-labelledby="pills-FastFood-tab" tabIndex="0">
 
-                                                <div class="food-title"><h2>FastFood</h2></div>
+                                                <div className="food-title"><h2>FastFood</h2></div>
 
                                                 <div className="dishes-card-wrap style1">
                                                 {foodItems.map((item, i) => (
@@ -88,7 +88,7 @@ const BestSelling4 = () => {
                                     
                                                 </div>
                                         <div className={`tab-pane ${isActive === 'DrinkJuice' ? 'active' : ''}`} id="pills-drinkJuice" role="tabpanel" aria-labelledby="pills-drinkJuice-tab" tabIndex="0">
-                                            <div class="food-title"><h2>DrinkJuice</h2></div>
+                                            <div className="food-title"><h2>DrinkJuice</h2></div>
                                                 <div className="dishes-card-wrap style1">
                                                     {foodItems.map((item, i) => (
                                                         <div key={i} className="dishes-card style1 wow fadeInUp" data-wow-delay="0.2s">
@@ -112,7 +112,7 @@ const BestSelling4 = () => {
                                                 </div>
                                         <div className={`tab-pane ${isActive === 'ChickenPizza' ? 'active' : ''}`}  id="pills-chickenPizza" role="tabpanel"
                                 aria-labelledby="pills-chickenPizza-tab" tabIndex="0">
-                                    <div class="food-title"><h2>ChickenPizza</h2></div>
+                                    <div className="food-title"><h2>ChickenPizza</h2></div>
                                 <div className="dishes-card-wrap style1">
                 {foodItems.map((item, i) => (
                     <div key={i} className="dishes-card style1 wow fadeInUp" data-wow-delay="0.2s">
@@ -151,7 +151,7 @@ const BestSelling4 = () => {
                             <span className="plus-btn"> <Link href="#"> <i className="bi bi-heart"></i></Link></span>
                             <ul>
                                 <li><Link href="/cart"><i className="bi bi-basket2"></i></Link></li>
-                                <li><Link href="/cart"><i class="bi bi-eye"></i></Link></li>
+                                <li><Link href="/cart"><i className="bi bi-eye"></i></Link></li>
                             </ul>
                         </div>
                     </div>
