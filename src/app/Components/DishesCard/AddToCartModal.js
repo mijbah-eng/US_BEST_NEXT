@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./mode.css"
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import axios from "axios";
@@ -8,7 +8,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import basecatagories from "../../../../utility/config";
+import basecatagories, { base_url, resturantId } from "../../../../utility/config";
 import { auth } from "../../../../utility/firebase/firebase";
 
 function AddToCartModal({show, handleClose, product}) {
@@ -325,7 +325,421 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-  
+  // Extra (single)
+  const toggleExtra = (extra) => {
+    const exists = selectedextra.find((s) => s.extraId === extra.extraId);
+    if (exists) {
+      setSelectedextra((prev) =>
+        prev.filter((s) => s.extraId !== extra.extraId)
+      );
+    } else {
+      setSelectedextra((prev) => [
+        ...prev,
+        {
+          price: extra.price || "0",
+          extraId: extra.extraId,
+          extraName: extra.extraName,
+        },
+      ]);
+    }
+  };
+
+    // side handle
+  const toggleSide = (side) => {
+    const exists = selectedside.find((s) => s.sideId === side.sideId);
+    if (exists) {
+      setSelectedside((prev) => prev.filter((s) => s.sideId !== side.sideId));
+    } else {
+      setSelectedside((prev) => [
+        ...prev,
+        {
+          price: side.price || "0",
+          sideId: side.sideId,
+          sideName: side.sideName,
+        },
+      ]);
+    }
+  };
+
+    // Extraside handle
+  const toggleextraSide = (side) => {
+    const exists = selectedextraside.find((s) => s.sideId === side.sideId);
+    if (exists) {
+      setSelectedextraside((prev) =>
+        prev.filter((s) => s.sideId !== side.sideId)
+      );
+    } else {
+      setSelectedextraside((prev) => [
+        ...prev,
+        {
+          price: side.price || "0",
+          sideId: side.sideId,
+          sideName: side.sideName,
+        },
+      ]);
+    }
+  };
+
+    // ingredient handle
+  const toggleIngredient = (ingredient) => {
+    const exists = selectedingredient.find(
+      (s) => s.ingredientId === ingredient.ingredientId
+    );
+    if (exists) {
+      setSelectedingredient((prev) =>
+        prev.filter((s) => s.ingredientId !== ingredient.ingredientId)
+      );
+    } else {
+      setSelectedingredient((prev) => [
+        ...prev,
+        {
+          price: ingredient.price || "0",
+          ingredientId: ingredient.ingredientId,
+          ingredientName: ingredient.ingredientName,
+        },
+      ]);
+    }
+  };
+
+    // Extraingredient handle
+  const toggleextraIngredient = (ingredient) => {
+    const exists = selectedextraingredient.find(
+      (s) => s.ingredientId === ingredient.ingredientId
+    );
+    if (exists) {
+      setSelectedextraingredient((prev) =>
+        prev.filter((s) => s.ingredientId !== ingredient.ingredientId)
+      );
+    } else {
+      setSelectedextraingredient((prev) => [
+        ...prev,
+        {
+          price: ingredient.price || "0",
+          ingredientId: ingredient.ingredientId,
+          ingredientName: ingredient.ingredientName,
+        },
+      ]);
+    }
+  };
+
+  // meatpreparation handle
+  const toggleMeatpreparation = (meatpreparation) => {
+    const exists = selectedmeatpreparation.find(
+      (s) => s.meatpreparationId === meatpreparation.meatpreparationId
+    );
+    if (exists) {
+      setSelectedmeatpreparation((prev) =>
+        prev.filter(
+          (s) => s.meatpreparationId !== meatpreparation.meatpreparationId
+        )
+      );
+    } else {
+      setSelectedmeatpreparation((prev) => [
+        ...prev,
+        {
+          price: meatpreparation.price || "0",
+          meatpreparationId: meatpreparation.meatpreparationId,
+          meatpreparationName: meatpreparation.meatpreparationName,
+        },
+      ]);
+    }
+  };
+
+  // Extrameatpreparation handle
+  const toggleextraMeatpreparation = (meatpreparation) => {
+    const exists = selectedextrameatpreparation.find(
+      (s) => s.meatpreparationId === meatpreparation.meatpreparationId
+    );
+    if (exists) {
+      setSelectedextrameatpreparation((prev) =>
+        prev.filter(
+          (s) => s.meatpreparationId !== meatpreparation.meatpreparationId
+        )
+      );
+    } else {
+      setSelectedextrameatpreparation((prev) => [
+        ...prev,
+        {
+          price: meatpreparation.price || "0",
+          meatpreparationId: meatpreparation.meatpreparationId,
+          meatpreparationName: meatpreparation.meatpreparationName,
+        },
+      ]);
+    }
+  };
+
+  // combotag handle
+  const togglecombotag = (combotag) => {
+    const exists = selectedcombotag.find(
+      (s) => s.combotagId === combotag.combotagId
+    );
+    if (exists) {
+      setSelectedcombotag((prev) =>
+        prev.filter((s) => s.combotagId !== combotag.combotagId)
+      );
+    } else {
+      setSelectedcombotag((prev) => [
+        ...prev,
+        {
+          price: combotag.price || "0",
+          combotagId: combotag.combotagId,
+          combotagName: combotag.combotagName,
+        },
+      ]);
+    }
+  };
+
+  const calculateTotalPrice = () => {
+    const arrays = [
+      selectedToppings,
+      selectedExtraToppings,
+      selectedSauces,
+      selectedExtraSauces,
+      selectedExtrasoda,
+      selectedsoda,
+      selectedstyle,
+      selectedexrastyle,
+      selectedfish,
+      selectedextrafish,
+      selectedchrust,
+      selectedextraChrust,
+      selectedside,
+      selectedextraside,
+      selectedingredient,
+      selectedextraingredient,
+      selectedmeatpreparation,
+      selectedextrameatpreparation,
+      selectedextra,
+      selectedcombotag,
+      selectedSize,
+    ];
+    let total = 0;
+    arrays.forEach((arr) => {
+      if (Array.isArray(arr)) {
+        arr.forEach((item) => {
+          const price = parseFloat(item?.price) || 0;
+          total += price;
+        });
+      }
+    });
+
+    total = total + parseFloat(selectedSize?.cprice);
+    setTotalprice(Number.isFinite(total) ? parseFloat(total.toFixed(2)) : 0);
+  };
+
+    useEffect(() => {
+    calculateTotalPrice();
+  }, [
+    selectedSize,
+    selectedToppings,
+    selectedExtraToppings,
+    selectedSauces,
+    selectedExtraSauces,
+    selectedsoda,
+    selectedExtrasoda,
+    selectedstyle,
+    selectedexrastyle,
+    selectedfish,
+    selectedextrafish,
+    selectedchrust,
+    selectedextraChrust,
+    selectedside,
+    selectedextraside,
+    selectedingredient,
+    selectedextraingredient,
+    selectedmeatpreparation,
+    selectedextrameatpreparation,
+    selectedcombotag,
+    selectedextra,
+    selectedSize,
+  ]);
+
+  const handleAddToCart = async () => {
+    if (!selectedSize || quantity <= 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: "Please Select Size and Quantity.",
+      });
+      return;
+    }
+
+    const payload = {
+      fish: selectedfish,
+      side: selectedside,
+      size: selectedSize?.customtype || "Regular",
+      soda: selectedsoda,
+      uuid: product.uuid || "",
+      sauce: selectedSauces,
+      style: selectedstyle,
+      chrust: selectedchrust,
+      extra: selectedextra,
+      menuId: product.menuId || "",
+      topping: selectedToppings.map((t) => ({
+        type: t.type,
+        price: t.price || "0",
+        toppingId: t.id || "",
+        toppingName: t.name,
+      })),
+      menuName: menu.menuName || "",
+      quantity,
+      Extrafish: selectedextrafish,
+      Extraside: selectedextraside,
+      Extrasoda: selectedExtrasoda,
+      Extraextra: selectedextrafish,
+      Extrasauce: selectedExtraSauces,
+      Extrastyle: selectedexrastyle,
+      ingredient: selectedingredient,
+      Extrachrust: selectedextraChrust,
+      Extratopping: selectedExtraToppings.map((e) => ({
+        type: e.type,
+        price: e.price || "0",
+        toppingId: e.id || "",
+        toppingName: e.name,
+      })),
+      Extracombotag: selectedcombotag,
+      Extraingredient: selectedextraingredient,
+      meatpreparation: selectedmeatpreparation,
+      Extrameatpreparation: selectedextrameatpreparation,
+      menuPrice: selectedSize?.cprice || menu.price || 0,
+    };
+
+    const auth = getAuth();
+
+    const user = await new Promise((resolve) => {
+      const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+        unsubscribe();
+        resolve(firebaseUser);
+      });
+    });
+
+    let userLog = localStorage.getItem('userLog');
+    if(!user){
+      console.log(userLog);      
+      if (!userLog) {
+        setPendingCartPayload(payload);
+        setShowLoginModal(true);
+        return;
+      }else{
+        await addToCartApi(payload, null);
+      }
+    }
+
+    await proceedWithAddToCart(user, payload);
+  };
+
+  const proceedWithAddToCart = async (user, payload) => {
+    try {
+      const idToken = await user.getIdToken();
+      localStorage.setItem('userLog','LoginUser');
+      localStorage.setItem("id_token", idToken);
+
+      let token = localStorage.getItem("jwt_token");
+
+      if (!token) {
+        const loginRes = await fetch(
+          "https://admin.foodstek.com/api/firebaseLogin",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ idToken }),
+          }
+        );
+
+        const data = await loginRes.json();
+        token = data.token;
+        localStorage.setItem("jwt_token", token);
+      }
+
+      await addToCartApi(payload, token);
+      setShowLoginModal(false);
+    } catch (error) {
+      console.error("Error in proceedWithAddToCart:", error);
+    }
+  };
+
+  const handleFirebaseLogin = async () => {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      localStorage.setItem('userLog','LoginUser');
+      await proceedWithAddToCart(user, pendingCartPayload);
+      setPendingCartPayload(null);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  const ContinueAsGuest = async () => {
+    localStorage.setItem('userLog','Guest');
+    await addToCartApi(pendingCartPayload, null);
+    setShowLoginModal(false);
+    setPendingCartPayload(null);
+  };
+
+  const addToCartApi = async (item, token) => {
+    const uuid = Cookies.get("uuid");
+    console.log(item);
+    
+    try {
+      setLoading(true);
+      let id_token = localStorage.getItem("id_token");
+      const res = await axios.post(`${base_url}/api/AddtoCartMenu`, {
+        resturantId: resturantId,
+        user_uuid: uuid,
+        menuId: product.menuId,
+        menuName: menu.menuName,
+        menuPrice: totalPrice,
+        quantity: quantity,
+        sizeDetails: selectedSize?.customtype || "Regular",
+        details: item,
+        idToken: id_token,
+      });
+      if (res.status) {
+        setLoading(false);
+        Swal.fire({
+          icon: "success",
+          title: "Added to Cart!",
+          text: "Your item was successfully added to the cart.",
+          confirmButtonText: "Go to Cart",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/shop-cart");
+          }
+        });
+      } else {
+        setLoading(false);
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: "Something went wrong. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Add to cart failed:", error);
+    }
+  };
+
+  const imageUrl = `${basecatagories}menu/${encodeURIComponent(menu.image)}`;
+  let priceDisplay = "";
+  if (menu.price) {
+    priceDisplay = `$${menu.price}`;
+  } else {
+    try {
+      const priceArray = menu.customeType;
+      if (priceArray?.length) {
+        priceDisplay = `$${priceArray[0].cprice} - $${
+          priceArray[priceArray.length - 1].cprice
+        }`;
+      }
+    } catch (err) {
+      priceDisplay = "Price not available";
+    }
+  }
+
 
      const increase = () => {
     setquantity(quantity + 1);
@@ -339,6 +753,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
     return ( <>
+    {loading && <Loader />}
     <Modal show={show} onHide={handleClose} size="lg" centered>
         <Modal.Header>
             <Modal.Title>
@@ -351,7 +766,7 @@ function AddToCartModal({show, handleClose, product}) {
                 <div className="modal-thumb">
                     <div className="product-big-img bg-color2">
                         <div className="dishes-modal-thumb">
-                    <img src="/assets/img/dishes/dishes1_2.png" alt="" />
+                    <img src={imageUrl} alt={menu?.menuName} />
 
                         </div>
                     </div>
@@ -359,20 +774,552 @@ function AddToCartModal({show, handleClose, product}) {
                 <div className="modal-details">
                     <div className="product-about">
                         <div className="title-wrapper">
-                            <h2 className="product-title">3 pcs Chicken Tender</h2>
-                            <p className="price">$7.99 - $7.99</p>
+                            <h2 className="product-title">{menu?.menuName}</h2>
+                            <h5 className="price">{totalPrice === 0 ? priceDisplay : `$ ${totalPrice}`}</h5>
+                            <p className="text-muted">{menu?.description}</p>
                         </div>
                     </div>
                 </div>
                 </Col>
                 <Col md={6}>
+                <div>
                 <h2>Item Options</h2>
                 <p>Required - Choose one.</p>
-                <Form.Check 
-                type="radio"
-                name="size"
-                label="5 pic"
-                />
+                <h5>Select Size</h5>
+                {menu.type === "custom" && menu.customeType?.length > 0 ? (
+                  menu.customeType.map((m, index) => (
+                    <Form.Check
+                      key={index}
+                      type="radio"
+                      name="size"
+                      label={`${m.customtype} - $${m.cprice}`}
+                      onChange={() => {
+                        handleSizeSelection(m);
+                        setitemsizeindex(index+1);
+                        calculateTotalPrice();
+                      }}
+                    />
+                  ))
+                ) : (
+                  <Form.Check
+                    type="radio"
+                    name="size"
+                    label={`Regular - $${menu.price}`}
+                    defaultChecked
+                    onChange={() => {
+                      handleSizeSelection({
+                        customtype: "Regular",
+                        cprice: menu.price,
+                      });
+                      setitemsizeindex(1);
+                      calculateTotalPrice();
+                    }}
+                  />
+                )}
+              </div>
+
+               {/* Regular Toppings */}
+              {menudetails?.topping?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Toppings</h5>
+                  {menudetails.topping.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.toppingName}
+                        checked={isChecked(item.toppingName, selectedToppings)}
+                        onChange={() =>
+                          toggleTopping(
+                            item.toppingName,
+                            menudetails.topping,
+                            selectedToppings,
+                            setSelectedToppings
+                          )
+                        }
+                      />
+                      {isChecked(item.toppingName, selectedToppings) && (
+                        <div className="ms-3 mt-1">
+                          <ButtonGroup>
+                            {["Left Half", "Right Half", "Whole"].map(
+                              (option, idx) => (
+                                <ToggleButton
+                                  key={idx}
+                                  id={`placement-${item.toppingName}-${idx}`}
+                                  type="radio"
+                                  className={`custom-toggle me-2 ${
+                                    getPlacement(
+                                      item.toppingName,
+                                      selectedToppings
+                                    ) === option
+                                      ? "selected"
+                                      : ""
+                                  }`}
+                                  name={`placement-${item.toppingName}`}
+                                  value={option}
+                                  checked={
+                                    getPlacement(
+                                      item.toppingName,
+                                      selectedToppings
+                                    ) === option
+                                  }
+                                  onChange={() =>
+                                    updatePlacement(
+                                      item.toppingName,
+                                      option,
+                                      selectedToppings,
+                                      setSelectedToppings
+                                    )
+                                  }
+                                >
+                                  {option}
+                                </ToggleButton>
+                              )
+                            )}
+                          </ButtonGroup>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* chrust*/}
+              {menudetails?.chrust?.length > 0 && (
+                <div className="mt-4">
+                  <h5>chrust</h5>
+                  {menudetails.chrust.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.chrustName}
+                        checked={selectedchrust.some(
+                          (s) => s.chrustId === item.chrustId
+                        )}
+                        onChange={() => toggleChrust(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* Sauces */}
+              {menudetails?.sauce?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Sauce</h5>
+                  {menudetails.sauce.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.sauce}
+                        checked={selectedSauces.some(
+                          (s) => s.sauceId === item.sauceId
+                        )}
+                        onChange={() => toggleSauce(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* soda*/}
+              {menudetails?.soda?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Soda</h5>
+                  {menudetails.soda.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.sodaName}
+                        checked={selectedsoda.some(
+                          (s) => s.sodaId === item.sodaId
+                        )}
+                        onChange={() => toggleSoda(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*style*/}
+              {menudetails?.style?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Style</h5>
+                  {menudetails.style.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.styleName}
+                        checked={selectedstyle.some(
+                          (s) => s.styleId === item.styleId
+                        )}
+                        onChange={() => toggleStyle(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*fish*/}
+              {menudetails?.fish?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Fish</h5>
+                  {menudetails.fish.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.fishName}
+                        checked={selectedfish.some(
+                          (s) => s.fishId === item.fishId
+                        )}
+                        onChange={() => toggleFish(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*side*/}
+              {menudetails?.side?.length > 0 && (
+                <div className="mt-4">
+                  <h5>side</h5>
+                  {menudetails.side.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.sideName}
+                        checked={selectedside.some(
+                          (s) => s.sideId === item.sideId
+                        )}
+                        onChange={() => toggleSide(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*ingredient*/}
+              {menudetails?.ingredient?.length > 0 && (
+                <div className="mt-4">
+                  <h5>ingredient</h5>
+                  {menudetails.ingredient.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.ingredientName}
+                        checked={selectedingredient.some(
+                          (s) => s.ingredientId === item.ingredientId
+                        )}
+                        onChange={() => toggleIngredient(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*meatpreparation*/}
+              {menudetails?.meatpreparation?.length > 0 && (
+                <div className="mt-4">
+                  <h5>meatpreparation</h5>
+                  {menudetails.meatpreparation.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={item.meatpreparationName}
+                        checked={selectedmeatpreparation.some(
+                          (s) => s.meatpreparationId === item.meatpreparationId
+                        )}
+                        onChange={() => toggleMeatpreparation(item)}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra single*/}
+              {menudetails?.extra?.length > 0 && (
+                <div className="mt-4">
+                  <h5>extra</h5>
+                  {menudetails.extra.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.extraName} - $${item.price}`}
+                        checked={selectedextra.some(
+                          (s) => s.extraId === item.extraId
+                        )}
+                        onChange={() => {
+                          toggleExtra(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*combotag single*/}
+              {menudetails?.combotag?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Combo</h5>
+                  {menudetails.combotag.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.combotagName} - $${item.price}`}
+                        checked={selectedcombotag.some(
+                          (s) => s.combotagId === item.combotagId
+                        )}
+                        onChange={() => {
+                          togglecombotag(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* -----------------Extra Details------------------- */}              
+              {menudetails?.extratopping?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Toppings</h5>
+                  {menudetails.extratopping.map((item, index) => {
+                    // Parse toppingDetails safely
+                    let toppingOptions = [];
+                    try {
+                      toppingOptions = item.toppingDetails
+                        ? JSON.parse(item.toppingDetails)
+                        : [];
+                    } catch (error) {
+                      console.error("Invalid toppingDetails JSON", error);
+                    }
+
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          type="checkbox"
+                          label={item.toppingName}
+                          checked={isChecked(
+                            item.toppingName,
+                            selectedExtraToppings
+                          )}
+                          onChange={() =>
+                            toggleTopping(
+                              item.toppingName,
+                              menudetails.extratopping,
+                              selectedExtraToppings,
+                              setSelectedExtraToppings
+                            )
+                          }
+                        />
+
+                        {isChecked(item.toppingName, selectedExtraToppings) && (
+                          <div className="ms-3 mt-1">
+                            <ButtonGroup>
+                              {toppingOptions.map((option, idx) => (
+                                <ToggleButton
+                                  key={idx}
+                                  id={`extratopping-${item.toppingName}-${idx}`}
+                                  type="radio"
+                                  className={`custom-toggle me-2 ${
+                                    getPlacement(
+                                      item.toppingName,
+                                      selectedExtraToppings
+                                    ) === option.type
+                                      ? "selected"
+                                      : ""
+                                  }`}
+                                  name={`extratopping-${item.toppingName}`}
+                                  value={option.type}
+                                  checked={
+                                    getPlacement(
+                                      item.toppingName,
+                                      selectedExtraToppings
+                                    ) === option.type
+                                  }
+                                  onChange={() =>
+                                    updatePlacement(
+                                      item.toppingName,
+                                      option.type,
+                                      option.price,
+                                      selectedExtraToppings,
+                                      setSelectedExtraToppings
+                                    )
+                                  }
+                                >
+                                  {option.type} (${option.price})
+                                </ToggleButton>
+                              ))}
+                            </ButtonGroup>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {/*Extra chrust*/}
+              {menudetails?.extrachrust?.length > 0 && (
+                <div className="mt-4">
+                  <h5>chrust</h5>
+                  {menudetails.extrachrust.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.chrustName} - $${item.price}`}
+                        checked={selectedextraChrust.some(
+                          (s) => s.chrustId === item.chrustId
+                        )}
+                        onChange={() => {
+                          toggleExtraChrust(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra Sauces */}
+              {menudetails?.extrasauce?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Sauce</h5>
+                  {menudetails.extrasauce.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.sauce} - $${item.price}`}
+                        checked={selectedExtraSauces.some(
+                          (s) => s.sauceId === item.sauceId
+                        )}
+                        onChange={() => {
+                          toggleExtraSauce(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/* extrasoda*/}
+              {menudetails?.extrasoda?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Soda</h5>
+                  {menudetails.extrasoda.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.sodaName} - $${item.price}`}
+                        checked={selectedExtrasoda.some(
+                          (s) => s.sodaId === item.sodaId
+                        )}
+                        onChange={() => {
+                          toggleExtraSoda(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra style*/}
+              {menudetails?.extrastyle?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Style</h5>
+                  {menudetails.extrastyle.map((item, index) => {
+                    const updatedPrice = (item.price * itemsizeIndex).toFixed(2);
+                    return (
+                      <div key={index}>
+                        <Form.Check
+                          type="checkbox"
+                          label={`${item.styleName} - $${updatedPrice}`}
+                          checked={selectedexrastyle.some(
+                            (s) => s.styleId === item.styleId
+                          )}
+                          onChange={() => {
+                            // create new object with updated price
+                            const updatedItem = { ...item, price: updatedPrice };
+                            toggleExtraStyle(updatedItem);
+                            calculateTotalPrice();
+                          }}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              {/* Extra Fish*/}
+              {menudetails?.extrafish?.length > 0 && (
+                <div className="mt-4">
+                  <h5>Fish</h5>
+                  {menudetails.extrafish.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.fishName} - $${item.price}`}
+                        checked={selectedextrafish.some(
+                          (s) => s.fishId === item.fishId
+                        )}
+                        onChange={() => {
+                          toggleExtraFish(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra side*/}
+              {menudetails?.extraside?.length > 0 && (
+                <div className="mt-4">
+                  <h5>side</h5>
+                  {menudetails.extraside.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.sideName} - $${item.price}`}
+                        checked={selectedextraside.some(
+                          (s) => s.sideId === item.sideId
+                        )}
+                        onChange={() => {
+                          toggleextraSide(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra ingredient*/}
+              {menudetails?.extraingredient?.length > 0 && (
+                <div className="mt-4">
+                  <h5>ingredient</h5>
+                  {menudetails.extraingredient.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.ingredientName} - $${item.price}`}
+                        checked={selectedextraingredient.some(
+                          (s) => s.ingredientId === item.ingredientId
+                        )}
+                        onChange={() => {
+                          toggleextraIngredient(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {/*Extra meatpreparation*/}
+              {menudetails?.extrameatpreparation?.length > 0 && (
+                <div className="mt-4">
+                  <h5>meatpreparation</h5>
+                  {menudetails.extrameatpreparation.map((item, index) => (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        label={`${item.meatpreparationName} - $${item.price}`}
+                        checked={selectedextrameatpreparation.some(
+                          (s) => s.meatpreparationId === item.meatpreparationId
+                        )}
+                        onChange={() => {
+                          toggleextraMeatpreparation(item);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
                 </Col>
             </Row>
         </Modal.Body>

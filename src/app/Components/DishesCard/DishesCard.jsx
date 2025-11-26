@@ -77,9 +77,9 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, 
         </ul>
       </div>
 
-      {/* {showModal && (
+      {showModal && (
         <AddToCartModal show={showModal} handleClose={handleCloseModal} product={product} />
-      )} */}
+      )}
       {/* <div className={`model-overlay ${modelShow ? "overlay-open" : ""}`} onClick={() => setModelShow(false)}></div> */}
     </div>
   );
