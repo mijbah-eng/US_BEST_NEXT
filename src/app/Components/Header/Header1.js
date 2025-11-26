@@ -255,7 +255,7 @@ const Sidebar = ({ toggle, setToggle }) => {
   };
   return (
     <Fragment>
- <div className="fix-area">
+      <div className="fix-area">
         <div
           className={`offcanvas__info ${toggle ? "info-open" : ""}`}
         >

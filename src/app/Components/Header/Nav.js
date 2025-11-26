@@ -6,7 +6,6 @@ import DropDown from "./DropDown";
 
 // const megaMenu = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Nav({ categories }) {
-  console.log(categories);
   
   return (
     <ul className="cs_nav_list fw-medium">
