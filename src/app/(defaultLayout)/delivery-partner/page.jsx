@@ -1,5 +1,6 @@
-import BreadCumb from "@src/app/Components/Common/BreadCumb";
-import Delivery from "@src/app/Components/Delivery/Delivery";
+import BreadCumb from "@/app/Components/Common/BreadCumb";
+import Delivery from "@/app/Components/Delivery/Delivery";
+
 
 const page = () => {
   return (
