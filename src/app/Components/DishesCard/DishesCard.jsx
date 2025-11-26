@@ -5,7 +5,7 @@ import { useState } from "react";
 import AddToCartModal from "./AddToCartModal";
 import "./mode.css";
 
-function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct }) {
+function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, handleClose, product }) {
   const [modelShow, setModelShow] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const handleCloseModal = () => {
@@ -77,9 +77,9 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct }
         </ul>
       </div>
 
-      {showModal && (
-        <AddToCartModal show={showModal} handleClose={handleCloseModal} />
-      )}
+      {/* {showModal && (
+        <AddToCartModal show={showModal} handleClose={handleCloseModal} product={product} />
+      )} */}
       {/* <div className={`model-overlay ${modelShow ? "overlay-open" : ""}`} onClick={() => setModelShow(false)}></div> */}
     </div>
   );

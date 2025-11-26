@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import DishesCard from "../DishesCard/DishesCard";
-import { mainmenu } from "../../../../utility/slice/GetCategoryMenumain";
-import CategoryTab from "./CategoryTab";
 import basecatagories from "../../../../utility/config";
+import { mainmenu } from "../../../../utility/slice/GetCategoryMenumain";
+import DishesCard from "../DishesCard/DishesCard";
+import CategoryTab from "./CategoryTab";
 
 const BestSelling1 = () => {
+  const [isActive, setIsActive] = useState("FastFood");
+
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -83,7 +85,7 @@ const BestSelling1 = () => {
     }));
     setItem(allCategories);
   };
-   const handleAddToCartClick = (product) => {
+  const handleAddToCartClick = (product) => {
     const imageUrl = `${basecatagories}menu/${encodeURIComponent(
       product.image
     )}`;
@@ -95,7 +97,7 @@ const BestSelling1 = () => {
     setShowModal(false);
     setSelectedProduct(null);
   };
-console.log("item =>",item);
+  console.log("item =>", item);
 
   return (
     <section className="popular-dishes-section fix section-padding">
@@ -145,35 +147,47 @@ console.log("item =>",item);
           <div className="food-menu-tab">
             {/* tab */}
             <CategoryTab
-            data={itemCategorymenu}
-            onCategorySelect={handleCategorySelect}
-            selectedCategoryId={selectedCategoryId}
+              isActive={isActive}
+              setIsActive={setIsActive}
+              data={itemCategorymenu}
+              onCategorySelect={handleCategorySelect}
+              selectedCategoryId={selectedCategoryId}
             />
             {/* content */}
             <div className="tab-content">
               {/* FAST FOOD */}
-             {item?.length > 0 ? (
-                  item.map((cat, catIndex) => (
+              {item?.length > 0
+                ? item.map((cat, catIndex) => (
                     <div className="tab-pane active" key={cat.categoryName}>
                       <div className="food-title">
                         <h2>{cat.categoryName}</h2>
                       </div>
 
                       <div className="dishes-card-wrap style1">
-                        {cat?.menu?.length > 0 ? (
-                          cat.menu.map((item, index) => {
-                            const imageUrl = `${basecatagories}menu/${encodeURIComponent(item.image)}`;
-                            return <DishesCard item={item} imageUrl={imageUrl} key={index} handleAddToCartClick={handleAddToCartClick} setSelectedProduct={setSelectedProduct} />;
-                          })
-                        ) : (
-                          "Data Not Found"
-                        )}
+                        {cat?.menu?.length > 0
+                          ? cat.menu.map((item, index) => {
+                              const imageUrl = `${basecatagories}menu/${encodeURIComponent(
+                                item.image
+                              )}`;
+
+                              return (
+                                <DishesCard
+                                  show={showModal}
+                                  handleClose={handleCloseModal}
+                                  product={selectedProduct}
+                                  item={item}
+                                  imageUrl={imageUrl}
+                                  key={index}
+                                  handleAddToCartClick={handleAddToCartClick}
+                                  setSelectedProduct={setSelectedProduct}
+                                />
+                              );
+                            })
+                          : "Data Not Found"}
                       </div>
                     </div>
                   ))
-                ) : (
-                  "Category Not Found"
-                )}
+                : "Category Not Found"}
             </div>
           </div>
           <div className="btn-wrapper  wow fadeInUp" data-wow-delay="0.9s">
