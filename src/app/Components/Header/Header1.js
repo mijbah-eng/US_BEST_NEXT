@@ -11,6 +11,7 @@ import { base_url, resturantId } from "../../../../utility/config";
 import { useRouter } from "next/navigation";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { Button, Modal } from "react-bootstrap";
 export default function Header1({ variant }) {
   const [isSticky, setIsSticky] = useState();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -433,6 +434,39 @@ const Sidebar = ({ toggle, setToggle }) => {
         }`}
         onClick={() => setToggle(!toggle)}
       ></div>
+
+ {/* Modal */}
+      <Modal
+        show={showLoginModal}
+        onHide={() => setShowLoginModal(false)}
+        centered
+      >
+        <Modal.Body className="login-modal-body text-center">
+          <img
+            src="https://i.ibb.co/mFPTyM16/Chat-GPT-Image-Jul-3-2025-01-29-11-PM-Photoroom.jpg"
+            alt="Login Illustration"
+            height={200}
+            width={200}
+          />
+          <h5 className="modal-title-text">Do you want to login ?</h5>
+          <p className="modal-subtext">
+            If you log in, you will able to see your Transaction.
+          </p>
+          <div className="modal-button-group">
+            {/* <Button variant="success" className="modal-btn guest" onClick={ContinueAsGuest}>
+              Guest
+            </Button> */}
+            <Button
+              variant="success"
+              className="modal-btn login"
+              onClick={handleFirebaseLogin}
+            >
+              Login
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
     </Fragment>
   )
 
