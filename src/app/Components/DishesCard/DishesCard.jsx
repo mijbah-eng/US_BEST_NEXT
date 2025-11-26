@@ -3,9 +3,15 @@ import "./mode.css"
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import AddToCartModal from "./AddToCartModal";
 
 function DishesCard({item}) {
     const [modelShow, setModelShow] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
+  };
     return ( 
         <div className="dishes-card style1">
                         <div className="dishes-thumb">
@@ -22,11 +28,11 @@ function DishesCard({item}) {
                             </span>
                             <ul>
                                 <li><Link href="/shop/cart"><i className="bi bi-basket2"></i></Link></li>
-                                <li><span className="" onClick={() => setModelShow(true)}><i class="bi bi-eye"></i></span></li>
+                                <li><span className="" onClick={() => setShowModal(true)}><i class="bi bi-eye"></i></span></li>
                             </ul>
                         </div>
 
-                        <div className="modal fade show" style={{display: modelShow ? "block" : ""}}  >
+                        {/* <div className="modal fade show" style={{display: modelShow ? "block" : ""}}  >
                             <div className="modal-dialog  modal-dialog-centered">
                                 <div className="modal-content pb-3 pe-3">
                                     <div className="modal-header border-0">
@@ -67,7 +73,8 @@ function DishesCard({item}) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
+                        {showModal && (<AddToCartModal show={showModal} handleClose={handleCloseModal} />)}
                         {/* <div className={`model-overlay ${modelShow ? "overlay-open" : ""}`} onClick={() => setModelShow(false)}></div> */}
         </div>
      );
