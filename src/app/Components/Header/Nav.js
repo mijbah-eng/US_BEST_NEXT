@@ -25,19 +25,19 @@ export default function Nav({ categories }) {
           <ul>
             <li>
               <div className="row mega-menu">
-                {categories.length === 0 ? (
+                {categories?.length === 0 ? (
                   <p>Loading categories...</p>
                 ) : (
                   categories?.map((category, index) => {
                     const imageUrl = `${basecatagories}category/${encodeURIComponent(
-                      category.image
+                      category?.image
                     )}`;
                     return (
                       <div key={index} className="col-md-6 col-lg-4">
                         <Link
                           href={{
                             pathname: "/shop-right-sidebar",
-                            query: { categoryId: category.categoryId },
+                            query: { categoryId: category?.categoryId },
                           }}
                         >
                           <div
@@ -45,7 +45,7 @@ export default function Nav({ categories }) {
                             onClick={() => {
                               localStorage.setItem(
                                 "categoryId",
-                                category.categoryId
+                                category?.categoryId
                               );
                               window.dispatchEvent(new Event("storageUpdate"));
                             }}
@@ -55,7 +55,7 @@ export default function Nav({ categories }) {
                                 <div className="mega-menu-thumbnail">
                                   <Image
                                     src={imageUrl}
-                                    alt={category.categoryName}
+                                    alt={category?.categoryName}
                                     width={80}
                                     height={80}
                                   />
@@ -64,15 +64,15 @@ export default function Nav({ categories }) {
                               </div>
                               <div className="mega-menu-media-info">
                                 <h4 className="mega-menu-heading">
-                                    {category.categoryName} <span></span>
+                                    {category?.categoryName} <span></span>
                                 </h4>
                                 <div className="mega-menu-desc">
-                                  {category.description
+                                  {category?.description
                                     ? category.description
                                         .split(" ")
                                         .slice(0, 7)
                                         .join(" ") +
-                                      (category.description.split(" ").length >
+                                      (category?.description?.split(" ")?.length >
                                       7
                                         ? "..."
                                         : "")
