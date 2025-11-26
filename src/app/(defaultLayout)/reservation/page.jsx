@@ -8,7 +8,7 @@ const page = () => {
     <div>
             <BreadCumb
                 bgimg="/assets/img/bg/breadcumb.jpg"
-                Title="Reservation"
+                Title="Catering"
             ></BreadCumb>      
             <Reservation></Reservation>  
             <Team5></Team5>       

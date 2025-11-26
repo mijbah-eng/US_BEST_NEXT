@@ -100,30 +100,17 @@ export default function Nav() {
           </ul>
         </DropDown>
       </li>
-
-      <li className="menu-item-has-children">
-        <Link href="/blog">Blog</Link>
-        {/* <DropDown>
-          <ul>
-            <li>
-              <Link href="/blog">Blog</Link>
-            </li>
-            <li>
-              <Link href="/blog-standard">Blog Standard</Link>
-            </li>
-            <li>
-              <Link href="/blog-sidebar">Blog With Sidebar</Link>
-            </li>
-            <li>
-              <Link href="/blog/blog-details">Blog Details</Link>
-            </li>
-          </ul>
-        </DropDown> */}
+      <li>
+              <Link href="/delivery-partner">Delivery</Link>
       </li>
       <li>
               <Link href="/gallery">Gallery</Link>
-            </li>
-      <li className="menu-item-has-children">
+      </li>
+      <li>
+              <Link href="/reservation">Catering</Link>
+      </li>
+      
+      {/* <li className="menu-item-has-children">
         <Link href="/shop">Shop</Link>
         <DropDown>
           <ul>
@@ -150,19 +137,9 @@ export default function Nav() {
             </li>
           </ul>
         </DropDown>
-      </li>
-      <li className="menu-item-has-children">
-        <Link href="/contact">Contact</Link>
-        <DropDown>
-          <ul>
-            <li>
-              <Link href="/contact">Contact Us 1</Link>
-            </li>
-            <li>
-              <Link href="/contact2">Contact Us 2</Link>
-            </li>
-          </ul>
-        </DropDown>
+      </li> */}
+      <li className="">
+        <Link href="/contact2">Contact</Link>
       </li>
     </ul>
   );

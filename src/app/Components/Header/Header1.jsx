@@ -238,6 +238,14 @@ export default function Header1({ variant }) {
               <div className="cs_main_header_left">
                 <Link className="cs_site_branding" href="/">
                   <Image
+                    src="/assets/img/header/open-24.png"
+                    alt="img"
+                    width={80}
+                    height={80}
+                  />
+                </Link>
+                <Link className="cs_site_branding" href="/">
+                  <Image
                     src="/assets/img/logo/logo.png"
                     alt="img"
                     width={80}

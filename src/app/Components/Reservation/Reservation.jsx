@@ -4,8 +4,8 @@ const Reservation = () => {
         <div className="reservation-section section-padding fix">
         <div className="reservation-wrapper">
             <div className="container">
-                <div className="row gy-5">
-                    <div className="col-xl-6 d-flex align-items-center">
+                <div className="row justify-content-center">
+                    {/* <div className="col-xl-6 d-flex align-items-center">
                         <div className="get-in-touch">
                             <h2>GET IN TOUCH</h2>
                             <p className="desc">Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
@@ -42,34 +42,38 @@ const Reservation = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-xl-6">
+                    </div> */}
+                    <div className="col-xl-8">
                         <div className="reservation-form">
                             <div className="contact-form style2">
-                                <h2>Create An <span className="text-theme-color">Reservation</span> </h2>
+                                <h2>Order your <span className="text-theme-color">Catering</span> </h2>
                                 <form className="row" action="#">
                                     <div className="col-md-6">
-                                        <label className="mb-2" htmlFor="date">Select Date*</label>
-                                        <input id="date" type="date" />
+                                        <label className="mb-2" htmlFor="customerName">Customer Name*</label>
+                                        <input id="customerName" name="customerName" type="text" />
                                     </div>
                                     <div className="col-md-6">
-                                        <label className="mb-2" htmlFor="time">Select Time*</label>
-                                        <input id="time" type="time" />
+                                        <label className="mb-2" htmlFor="time">No of Person*</label>
+                                        <input id="time" type="text"  name="noOfPerson" />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="mb-2" htmlFor="phone">Give Phone Number*</label>
-                                        <input id="phone" type="number" placeholder="Phone Number" />
+                                        <input id="phone" type="number" placeholder="Phone Number" name="phoneNumber" />
                                     </div>
                                     <div className="col-md-6">
                                         <label className="mb-2" htmlFor="service">Number of Guest*</label>
-                                        <input id="service" type="text" placeholder="Guest" />
+                                        <input id="service" type="date" name="date"  />
+                                    </div>
+                                     <div className="col-md-6">
+                                        <label className="mb-2" htmlFor="email">Email Address*</label>
+                                        <input id="email" type="email" placeholder="example@gmail.com" name="email" />
                                     </div>
                                     <div className="col-12">
-                                        <textarea id="message" className="form-control"
-                                            placeholder="Write your message here..." rows="5"></textarea>
+                                        <textarea id="description" className="form-control"
+                                            placeholder="Special Request / Message" rows="5"></textarea>
                                     </div>
                                     <div className="col-12 form-group mb-0">
-                                        <button className="theme-btn w-100">BOOK A TABLE <i className="bi bi-arrow-right bg-transparent text-white"></i></button>
+                                        <button type="submit" className="theme-btn w-100">Send <i className="bi bi-arrow-right bg-transparent text-white"></i></button>
                                     </div>
                                 </form>
                             </div>

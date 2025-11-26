@@ -150,10 +150,10 @@ const Footer1 = () => {
                             </div>
                             <ul className="list-area">
                                 <li className="mb-2">
-                                    Monday – Friday: <span className="text-theme-color2"> 8am – 4pm </span>
+                                <span className="text-theme-color2"> 24 hr </span>
                                 </li>
                                 <li>
-                                    Saturday: <span className="text-theme-color2"> 8am – 12am </span>
+                                <span className="text-theme-color2"> Monday – Sunday </span>
                                 </li>
                             </ul>
                             <form className="mt-4">

@@ -203,7 +203,7 @@ textarea.form-control {
   -moz-border-radius: 0;
   -ms-border-radius: 0;
   -o-border-radius: 0;
-  border: none;
+  /* border: none; */
 }
 
 input.form-control:focus,
@@ -1386,7 +1386,7 @@ textarea.form-control:focus {
 }
 
 .text-theme-color2 {
-  color: var(--theme2) !important;
+  color: var(--theme) !important;
 }
 
 .text-orange-color {
@@ -1737,7 +1737,7 @@ textarea.form-control:focus {
 
 /* 11.Title */
 .section-title .sub-title {
-  color: var(--theme2);
+  color: var(--theme);
   font-family: "Epilogue", sans-serif;
   font-size: 20px;
   font-style: normal;
@@ -11647,49 +11647,6 @@ input.main-search-input::placeholder {
   }
 }
 
-.product-about .title-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.product-about .product-title {
-  color: var(--title);
-  font-family: var(--title-font);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 50px;
-  text-transform: capitalize;
-}
-.product-about .price {
-  color: var(--title);
-  font-family: var(--title-font);
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 30px;
-  text-transform: capitalize;
-}
-.product-about .product-rating {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid var(--border-2);
-}
-.product-about .text {
-  color: var(--text);
-  font-family: var(--body-font);
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 26px;
-  margin-bottom: 35px;
-}
-.product-about .share {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
 .actions {
   margin-bottom: 15px;
 }
@@ -13308,6 +13265,9 @@ table.woocommerce-product-attributes {
 .cs_site_header.cs_style_1.cs_color_1 .cs_nav_list > li > a:hover {
   color: #e9a132;
 }
+.cs_site_header_spacing_130 {
+    height: 95px;
+}
 @media screen and (min-width: 1200px) {
 
   .mega-menu .mega-menu-box {
@@ -13693,7 +13653,7 @@ table.woocommerce-product-attributes {
   display: none;
 }
 .cs_site_header_spacing_130 {
-  height: 96px;
+  height: 95px;
 }
 
 }
@@ -13868,7 +13828,7 @@ table.woocommerce-product-attributes {
       display: none;
   }
   .cs_site_header_spacing_130 {
-    height: 90px;
+    height: 95px;
 }  
 .cs_site_header_spacing_140 {
   height: 100px;
@@ -13972,7 +13932,7 @@ table.woocommerce-product-attributes {
 }
 @media (max-width: 1199px) {
   .cs_site_header_spacing_130 {
-    height: 96px;
+    height: 95px;
 }
 }
 .food-slider-item .slick-slide img{

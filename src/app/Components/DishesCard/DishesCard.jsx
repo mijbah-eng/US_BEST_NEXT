@@ -1,4 +1,5 @@
 "use client"
+import "./mode.css"
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -48,13 +49,18 @@ function DishesCard({item}) {
                                                                 <h2 className="product-title">3 pcs Chicken Tender</h2>
                                                                 <div className="price">$  7.99 - $ 7.99  </div>
                                                             </div>
-                                                            <p className="text">Choose your spice level</p>
+                                                            <span className="text">Choose your spice level</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className="col-xxl-7 col-md-12 col-sm-12">
+                                                <div className="col-xxl-7 col-md-12 col-sm-12"   style={{height: "500px",overflowY: "auto",    paddingRight: "10px",display:"flex",flexDirection:"column", alignItems:"flex-start",}}>
                                                     <h2>Item Options</h2>
-                                                    <p>Required - Choose one.</p>
+                                                    <span>Required - Choose one.</span>
+                                                    <form action="#">
+                                                        <div className="">
+
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
