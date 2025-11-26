@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import DropDown from "./DropDown";
 import basecatagories from "../../../../utility/config";
+import DropDown from "./DropDown";
 
 const megaMenu = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function Nav({ categories }) {
@@ -10,15 +10,13 @@ export default function Nav({ categories }) {
       <li className="">
         <Link href="/">Home</Link>
       </li>
-      <li className="menu-item-has-children megaMenu">
-
-                        <a
-                          onClick={() => {
-                            localStorage.removeItem("categoryId");
-                          }}
-                        >
-                          Menu
-                        </a>
+      <li
+        className="menu-item-has-children megaMenu"
+        onClick={() => {
+          localStorage.removeItem("categoryId");
+        }}
+      >
+        <Link href={"/menu2"}>Menu</Link>
 
         <DropDown>
           <ul>
@@ -33,25 +31,25 @@ export default function Nav({ categories }) {
                     )}`;
                     return (
                       <div key={index} className="col-md-6 col-lg-4">
-                        <Link 
+                        <Link
                           href={{
                             pathname: "/shop-right-sidebar",
                             query: { categoryId: category.categoryId },
                           }}
                         >
-                        <div className="mega-menu-box"
-                         onClick={() => {
+                          <div
+                            className="mega-menu-box"
+                            onClick={() => {
                               localStorage.setItem(
                                 "categoryId",
                                 category.categoryId
                               );
                               window.dispatchEvent(new Event("storageUpdate"));
                             }}
-                        >
-                          <div className="mega-menu-media">
-                            <div className="mega-menu-media-img">
-                              <div className="mega-menu-thumbnail">
-
+                          >
+                            <div className="mega-menu-media">
+                              <div className="mega-menu-media-img">
+                                <div className="mega-menu-thumbnail">
                                   <Image
                                     src={imageUrl}
                                     alt={category.categoryName}
@@ -59,33 +57,27 @@ export default function Nav({ categories }) {
                                     height={80}
                                   />
                                   <span></span>
-                                
+                                </div>
                               </div>
-                            </div>
-                            <div className="mega-menu-media-info">
-                              <h4 className="mega-menu-heading">
-                                <Link 
-                                href={{
-                            pathname: "/shop-right-sidebar",
-                            query: { categoryId: category.categoryId },
-                          }} >
-                                  {category.categoryName} <span></span>
-                                </Link>
-                              </h4>
-                              <div className="mega-menu-desc">
-                                 {category.description
-                                  ? category.description
-                                      .split(" ")
-                                      .slice(0, 7)
-                                      .join(" ") +
-                                    (category.description.split(" ").length > 7
-                                      ? "..."
-                                      : "")
-                                  : ""}
+                              <div className="mega-menu-media-info">
+                                <h4 className="mega-menu-heading">
+                                    {category.categoryName} <span></span>
+                                </h4>
+                                <div className="mega-menu-desc">
+                                  {category.description
+                                    ? category.description
+                                        .split(" ")
+                                        .slice(0, 7)
+                                        .join(" ") +
+                                      (category.description.split(" ").length >
+                                      7
+                                        ? "..."
+                                        : "")
+                                    : ""}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
                         </Link>
                       </div>
                     );

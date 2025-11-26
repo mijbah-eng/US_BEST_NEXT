@@ -146,11 +146,11 @@ export default function Header1({ variant }) {
               </div>
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
-                  <Link href={'/cart'}
+                  <a href={'/cart'}
                     className="cart-trigger cart-icon"
                   >
                     <i className="bi bi-cart"></i>
-                    {cartItems.length > 0 && (
+                    {cartItems?.length > 0 && (
                         <span
                           style={{
                             position: "absolute",
@@ -167,10 +167,10 @@ export default function Header1({ variant }) {
                             fontWeight: 500,
                           }}
                         >
-                          {cartItems.length}
+                          {cartItems?.length}
                         </span>
                       )}
-                  </Link>
+                  </a>
                   <a
                     onClick={() => setToggle(!toggle)}
                     className="menu-trigger menu-icon"
