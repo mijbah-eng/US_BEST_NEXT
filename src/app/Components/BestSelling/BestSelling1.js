@@ -9,61 +9,6 @@ import CategoryTab from "./CategoryTab";
 import basecatagories from "../../../../utility/config";
 
 const BestSelling1 = () => {
-  const [isActive, setIsActive] = useState("FastFood");
-  const tabs = [
-    {
-      key: "FastFood",
-      title: "Fast Food",
-      img: "/assets/img/menu/menuIcon1_1.png",
-    },
-    {
-      key: "DrinkJuice",
-      title: "Drink & Juice",
-      img: "/assets/img/menu/menuIcon1_2.png",
-    },
-    {
-      key: "ChickenPizza",
-      title: "Chicken Pizza",
-      img: "/assets/img/menu/menuIcon1_3.png",
-    },
-    {
-      key: "FreshPasta",
-      title: "Fresh Pasta",
-      img: "/assets/img/menu/menuIcon1_4.png",
-    },
-  ];
-  const foodItems = [
-    {
-      img: "/assets/img/dishes/dishes1_1.png",
-      title: "Chicken Fried Rice",
-      content: "The registration fee",
-      price: "$100.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_2.png",
-      title: "Chinese Pasta",
-      content: "The registration fee",
-      price: "$15.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_3.png",
-      title: "Chicken Pizza",
-      content: "The registration fee",
-      price: "$26.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_4.png",
-      title: "Chicken Noodles",
-      content: "The registration fee",
-      price: "$39.00",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_5.png",
-      title: "Grilled Chicken",
-      content: "The registration fee",
-      price: "$20.99",
-    },
-  ];
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -200,7 +145,6 @@ console.log("item =>",item);
           <div className="food-menu-tab">
             {/* tab */}
             <CategoryTab
-            isActive={isActive} setIsActive={setIsActive}
             data={itemCategorymenu}
             onCategorySelect={handleCategorySelect}
             selectedCategoryId={selectedCategoryId}
@@ -230,98 +174,6 @@ console.log("item =>",item);
                 ) : (
                   "Category Not Found"
                 )}
-               
-              
-
-              {/* DRINK JUICE */}
-              {isActive === "DrinkJuice" && (
-                <div className="tab-pane active">
-                  <div className="food-title">
-                    <h2>Drink & Juice</h2>
-                  </div>
-
-                  <div className="dishes-card-wrap style1">
-                    {foodItems.map((item, i) => (
-                      <div key={i} className="dishes-card style1">
-                        <div className="dishes-thumb">
-                          <Image
-                            src={item.img}
-                            alt="img"
-                            width={158}
-                            height={158}
-                          />
-                        </div>
-
-                        <Link href="/menu">
-                          <h3>{item.title}</h3>
-                        </Link>
-                        <p>{item.content}</p>
-                        <h6>{item.price}</h6>
-
-                        <div className="social-profile">
-                          <span className="plus-btn">
-                            <Link href="/shop/wishlist">
-                              <i className="bi bi-heart"></i>
-                            </Link>
-                          </span>
-                          <ul>
-                            <li>
-                              <Link href="/shop/cart">
-                                <i className="bi bi-basket2"></i>
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* CHICKEN PIZZA */}
-              {isActive === "ChickenPizza" && (
-                <div className="tab-pane active">
-                  <div className="food-title">
-                    <h2>Chicken Pizza</h2>
-                  </div>
-
-                  <div className="dishes-card-wrap style1">
-                    {foodItems.map((item, i) => (
-                      <div key={i} className="dishes-card style1">
-                        <div className="dishes-thumb">
-                          <Image
-                            src={item.img}
-                            alt="img"
-                            width={158}
-                            height={158}
-                          />
-                        </div>
-
-                        <Link href="/menu">
-                          <h3>{item.title}</h3>
-                        </Link>
-                        <p>{item.content}</p>
-                        <h6>{item.price}</h6>
-
-                        <div className="social-profile">
-                          <span className="plus-btn">
-                            <Link href="/shop/wishlist">
-                              <i className="bi bi-heart"></i>
-                            </Link>
-                          </span>
-                          <ul>
-                            <li>
-                              <Link href="/shop/cart">
-                                <i className="bi bi-basket2"></i>
-                              </Link>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
           </div>
           <div className="btn-wrapper  wow fadeInUp" data-wow-delay="0.9s">
