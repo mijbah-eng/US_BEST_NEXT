@@ -52,7 +52,7 @@
   --black: #000;
   --white: #fff;
   --theme: #EB0029;
-  --theme2:#FC791A;
+  --theme2:#0d3b61;
   --title:#010F1C;
   --dark: #222222;
   --text: #5C6574;
@@ -219,7 +219,7 @@ textarea.form-control:focus {
   display: inline-block;
   position: relative;
   padding: 13px 25px 13px 25px;
-  background-color: var(--theme);
+  background-color: var(--theme2);
   color: var(--white) !important;
   font-family: var(--body-font);
   font-size: 14px;
@@ -252,7 +252,7 @@ textarea.form-control:focus {
 }
 .theme-btn:before {
   content: "";
-  background-color: var(--theme2);
+  background-color: var(--theme);
   width: 0;
   height: 50%;
   position: absolute;
@@ -267,7 +267,7 @@ textarea.form-control:focus {
 }
 .theme-btn:after {
   content: "";
-  background-color: var(--theme2);
+  background-color: var(--theme);
   width: 0;
   height: 50%;
   position: absolute;
@@ -284,7 +284,7 @@ textarea.form-control:focus {
   margin-left: 10px;
 }
 .theme-btn:hover {
-  background-color: var(--theme2);
+  background-color: var(--theme);
   color: var(--white) !important;
 }
 .theme-btn:hover::before, .theme-btn:hover::after {
@@ -387,9 +387,9 @@ textarea.form-control:focus {
   border: 1px solid var(--theme);
 }
 .theme-btn.style5 {
-  background-color: var(--theme2);
+  background-color: var(--title);
   color: var(--white) !important;
-  border: 1px solid var(--theme2);
+  border: 1px solid var(--theme);
   border-radius: 0;
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -403,14 +403,14 @@ textarea.form-control:focus {
 }
 .theme-btn.style5:before {
   content: "";
-  background-color: var(--title);
+  background-color: var(--theme2);
 }
 .theme-btn.style5:after {
   content: "";
-  background-color: var(--title);
+  background-color: var(--theme2);
 }
 .theme-btn.style5:hover {
-  background-color: var(--title);
+  background-color: var(--theme);
   color: var(--white) !important;
   border: 1px solid var(--theme);
 }

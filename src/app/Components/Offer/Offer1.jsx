@@ -11,9 +11,9 @@ const Offer1 = () => {
       }, []);
 
       const offerItems = [
-        {img:'/assets/img/offer/offerThumb1_1.png', title1:'ON THIS WEEK', title2:'SPICY FRIED CHICKEN', content:'limits Time Offer', addClass:'theme-btn style4'},      
-        {img:'/assets/img/offer/offerThumb1_2.png', title1:'WELCOME FRESHEAT', title2:'TODAY SPACIAL FOOD', content:'limits Time Offer', addClass:'theme-btn style5'},      
-        {img:'/assets/img/offer/offerThumb1_3.png', title1:'ON THIS WEEK', title2:'SPECIAL CHICKEN ROLL', content:'limits Time Offer', addClass:'theme-btn style4'},      
+        {img:'/assets/img/offer/offerThumb1_1.png', title1:'ON THIS WEEK', title2:'BREAKFAST', content:'limits Time Offer', addClass:'theme-btn style5'},      
+        {img:'/assets/img/offer/offerThumb1_2.png', title1:'WELCOME FRESHEAT', title2:'LUNCH / DINNER', content:'limits Time Offer', addClass:'theme-btn style5'},      
+        {img:'/assets/img/offer/offerThumb1_3.png', title1:'ON THIS WEEK', title2:'DINNER', content:'limits Time Offer', addClass:'theme-btn style5'},      
       ]; 
 
     return (
@@ -28,7 +28,7 @@ const Offer1 = () => {
                             <div className="offer-content">
                                 <h6>{item.title1}</h6>
                                 <h3>{item.title2}</h3>
-                                <p>{item.content}</p>
+                                {/* <p>{item.content}</p> */}
                                 <Link href="/menu" className={item.addClass}>
                                     ORDER NOW <i className="bi bi-arrow-right"></i>
                                 </Link>
