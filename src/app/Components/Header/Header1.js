@@ -334,7 +334,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                 <ul>
                   <li className="d-flex align-items-center">
                     <div className="offcanvas__contact-icon">
-                      <i className="fal fa-map-marker-alt"></i>
+                      <i className="bi bi-geo-alt"></i>
                     </div>
                     <div className="offcanvas__contact-text">
                       <a target="_blank" rel="noopener noreferrer" href="#">
@@ -345,27 +345,27 @@ const Sidebar = ({ toggle, setToggle }) => {
 
                   <li className="d-flex align-items-center">
                     <div className="offcanvas__contact-icon mr-15">
-                      <i className="fal fa-envelope"></i>
+                      <i className="bi bi-envelope"></i>
                     </div>
                     <div className="offcanvas__contact-text">
-                      <a href="mailto:info@fresheat.com">info@fresheat.com</a>
+                      <a href="mailto:info@fresheat.com">info@usbest.com</a>
                     </div>
                   </li>
 
                   <li className="d-flex align-items-center">
                     <div className="offcanvas__contact-icon mr-15">
-                      <i className="fal fa-clock"></i>
+                      <i className="bi bi-clock"></i>
                     </div>
                     <div className="offcanvas__contact-text">
                       <a target="_blank" rel="noopener noreferrer" href="#">
-                        Mon-Friday, 09am - 05pm
+                        Monday - Sunday
                       </a>
                     </div>
                   </li>
 
                   <li className="d-flex align-items-center">
                     <div className="offcanvas__contact-icon mr-15">
-                      <i className="far fa-phone"></i>
+                      <i className="bi bi-telephone"></i>
                     </div>
                     <div className="offcanvas__contact-text">
                       <a href="tel:+11002345909">+11002345909</a>
@@ -411,16 +411,16 @@ const Sidebar = ({ toggle, setToggle }) => {
 
                 <div className="social-icon d-flex align-items-center">
                   <a href="#">
-                    <i className="fab fa-facebook-f"></i>
+                    <i className="bi bi-facebook"></i>
                   </a>
                   <a href="#">
-                    <i className="fab fa-twitter"></i>
+                    <i className="bi bi-twitter"></i>
                   </a>
                   <a href="#">
-                    <i className="fab fa-youtube"></i>
+                    <i className="bi bi-youtube"></i>
                   </a>
                   <a href="#">
-                    <i className="fab fa-linkedin-in"></i>
+                    <i className="bi bi-linkedin"></i>
                   </a>
                 </div>
               </div>
