@@ -147,7 +147,7 @@ console.log(cartItems);
               </div>
               <div className="cs_main_header_right">
                 <div className="header-btn d-flex align-items-center">
-                  <a href={'/cart'}
+                  <a href={'/shop/cart'}
                     className="cart-trigger cart-icon"
                   >
                     <i className="bi bi-cart"></i>
