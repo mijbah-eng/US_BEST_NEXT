@@ -12413,7 +12413,7 @@ input.main-search-input::placeholder {
 }
 
 .product-big-img {
-  padding: 40px 40px;
+  padding: 40px 160px;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;

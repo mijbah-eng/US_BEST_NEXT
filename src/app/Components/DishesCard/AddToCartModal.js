@@ -762,7 +762,7 @@ function AddToCartModal({show, handleClose, product}) {
         </Modal.Header>
         <Modal.Body>
             <Row>
-                <Col md={6}>
+                <Col md={6} style={{height: "500px",overflowY:"auto"}}>
                 <div className="modal-thumb">
                     <div className="product-big-img bg-color2">
                         <div className="dishes-modal-thumb">
