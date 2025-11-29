@@ -35,7 +35,7 @@ export default function Nav({ categories }) {
                       <div key={index} className="col-md-6 col-lg-4">
                         <Link
                           href={{
-                            pathname: "/shop-right-sidebar",
+                            pathname: "/menu2",
                             query: { categoryId: category?.categoryId },
                           }}
                         >

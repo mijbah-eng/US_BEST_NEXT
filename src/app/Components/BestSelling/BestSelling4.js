@@ -19,68 +19,6 @@ const BestSelling4 = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const dispatch = useDispatch();
-  const foodItems = [
-    {
-      img: "/assets/img/dishes/dishes1_1.png",
-      title: "Chicken Fried Rice",
-      content: "The registration fee",
-      price: "$100.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_2.png",
-      title: "Chinese Pasta",
-      content: "The registration fee",
-      price: "$15.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_3.png",
-      title: "Chicken Pizza",
-      content: "The registration fee",
-      price: "$26.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_4.png",
-      title: "Chicken Noodles",
-      content: "The registration fee",
-      price: "$39.00",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_5.png",
-      title: "Grilled Chicken",
-      content: "The registration fee",
-      price: "$20.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_1.png",
-      title: "Chicken Fried Rice",
-      content: "The registration fee",
-      price: "$100.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_2.png",
-      title: "Chinese Pasta",
-      content: "The registration fee",
-      price: "$15.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_3.png",
-      title: "Chicken Pizza",
-      content: "The registration fee",
-      price: "$26.99",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_4.png",
-      title: "Chicken Noodles",
-      content: "The registration fee",
-      price: "$39.00",
-    },
-    {
-      img: "/assets/img/dishes/dishes1_5.png",
-      title: "Grilled Chicken",
-      content: "The registration fee",
-      price: "$20.99",
-    },
-  ];
 
   // get categoryId from localStorage
   useEffect(() => {

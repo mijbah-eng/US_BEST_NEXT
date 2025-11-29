@@ -762,7 +762,7 @@ function AddToCartModal({show, handleClose, product}) {
         </Modal.Header>
         <Modal.Body>
             <Row>
-                <Col md={6} style={{height: "500px",overflowY:"auto"}}>
+                <Col md={6}>
                 <div className="modal-thumb">
                     <div className="product-big-img bg-color2">
                         <div className="dishes-modal-thumb">
@@ -781,7 +781,7 @@ function AddToCartModal({show, handleClose, product}) {
                     </div>
                 </div>
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="list_box">
                 <div>
                 <h2>Item Options</h2>
                 <p>Required - Choose one.</p>
