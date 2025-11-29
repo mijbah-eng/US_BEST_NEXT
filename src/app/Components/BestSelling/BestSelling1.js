@@ -158,7 +158,7 @@ const BestSelling1 = () => {
               {/* FAST FOOD */}
               {item?.length > 0
                 ? item.map((cat, catIndex) => (
-                    <div className="tab-pane active" key={cat.categoryName}>
+                    <div className={`tab-pane ${catIndex === 0 ?  'active': ''}`} key={cat.categoryName}>
                       <div className="food-title">
                         <h2>{cat.categoryName}</h2>
                       </div>
