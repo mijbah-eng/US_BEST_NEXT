@@ -8,10 +8,11 @@ const page = () => {
     <div>
             <BreadCumb
                 bgimg="/assets/img/bg/breadcumb.jpg"
-                Title="Catering"
+                pageName="Catering"
+                pageKey="catering"
+
             ></BreadCumb>      
             <Reservation></Reservation>  
-            <Team5></Team5>       
     </div>
   );
 };

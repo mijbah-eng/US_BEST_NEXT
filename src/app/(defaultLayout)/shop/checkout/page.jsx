@@ -8,6 +8,7 @@ const page = () => {
               <BreadCumb
                 bgimg="/assets/img/bg/breadcumb.jpg"
                 Title="Checkout"
+                pageName={"CHECKOUT"} pageKey={"CHECKOUT"}
             ></BreadCumb>   
             <Checkout></Checkout>       
     </div>

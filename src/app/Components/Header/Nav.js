@@ -18,6 +18,7 @@ export default function Nav({ categories }) {
           localStorage.removeItem("categoryId");
         }}
       >
+        
         <Link href={"/menu2"}>Menu</Link>
 
         <DropDown>
@@ -85,34 +86,6 @@ export default function Nav({ categories }) {
                     );
                   })
                 )}
-                {/* {megaMenu.map((item, index) => (
-                  <div key={index} className="col-md-6 col-lg-4">
-                    <div className="mega-menu-box">
-                      <div className="mega-menu-media">
-                        <div className="mega-menu-media-img">
-                          <div className="mega-menu-thumbnail">
-                            <Link href={"/"}>
-                              <Image
-                                src={"/assets/img/menu/menuThumb3_1.png"}
-                                width={100}
-                                height={100}
-                              />
-                              <span></span>
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="mega-menu-media-info">
-                          <h4 className="mega-menu-heading">
-                            <Link href={"/menu2"} alt="">
-                              Whole Wings <span></span>
-                            </Link>
-                          </h4>
-                          <div className="mega-menu-desc">24 Wings Flavors</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))} */}
 
                 <div className="col-md-12 col-lg-12 d-flex justify-content-center">
                   <Link href={"/menu2"} className="theme-btn" alt="">

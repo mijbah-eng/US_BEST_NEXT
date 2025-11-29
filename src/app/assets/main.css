@@ -14122,6 +14122,10 @@ table.woocommerce-product-attributes {
 .cs_site_header_spacing_130 {
   height: 95px;
 }
+.mega-menu-thumbnail img{
+  width: 100%;
+  height: 100%;
+}
 @media screen and (min-width: 1200px) {
   .mega-menu .mega-menu-box {
     margin-bottom: 25px;
@@ -14137,7 +14141,7 @@ table.woocommerce-product-attributes {
   .cs_main_header_center,
   .cs_top_header_center {
     position: absolute;
-    left: 50%;
+    left: 55%;
     top: 50%;
     transform: translate(-50%, -50%);
   }
@@ -14632,6 +14636,9 @@ table.woocommerce-product-attributes {
 }
 .cs_site_header.cs_style_1 .cs_main_header_in {
   height: 100px;
+}
+.cs_nav .cs_nav_list > li > a {
+  font-size: 20px;
 }
 .cs_nav .cs_nav_list > li > a:hover {
   color: var(--theme2);

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,11 +8,7 @@ export default function ScrollToTop() {
   // Scroll event detect
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 200);
     };
 
     window.addEventListener("scroll", toggleVisibility);
@@ -30,7 +26,9 @@ export default function ScrollToTop() {
   return (
     <>
       {isVisible && (
-        <div className="back-to-top show"><i class="bi bi-arrow-up-short"></i></div>
+        <div onClick={scrollToTop} className="back-to-top show">
+          <i className="bi bi-arrow-up-short"></i>
+        </div>
       )}
     </>
   );
