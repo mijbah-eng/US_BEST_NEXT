@@ -2,7 +2,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import loadBackgroudImages from "./loadBackgroudImages";
-import basecatagories, { base_url } from "../../../../utility/config";
+import basecatagories, { base_url, resturantId } from "../../../../utility/config";
+import axios from "axios";
 
 const BreadCumb = ({ pageName, pageKey, bgimg, Title }) => {
   const [bannerData, setBannerData] = useState([]);
