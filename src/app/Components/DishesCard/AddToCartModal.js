@@ -787,11 +787,14 @@ function AddToCartModal({show, handleClose, product}) {
                 <p>Required - Choose one.</p>
                 <h5>Select Size</h5>
                 {menu.type === "custom" && menu.customeType?.length > 0 ? (
-                  menu.customeType.map((m, index) => (
+                  menu.customeType.map((m, index) => {
+                    const id = `size-${index + 1}`;
+                    return (
                     <Form.Check
                       key={index}
                       type="radio"
                       name="size"
+                      id={id}
                       label={`${m.customtype} - $${m.cprice}`}
                       onChange={() => {
                         handleSizeSelection(m);
@@ -799,7 +802,7 @@ function AddToCartModal({show, handleClose, product}) {
                         calculateTotalPrice();
                       }}
                     />
-                  ))
+                  )})
                 ) : (
                   <Form.Check
                     type="radio"
@@ -822,10 +825,13 @@ function AddToCartModal({show, handleClose, product}) {
               {menudetails?.topping?.length > 0 && (
                 <div className="mt-4">
                   <h5>Toppings</h5>
-                  {menudetails.topping.map((item, index) => (
+                  {menudetails.topping.map((item, index) => {
+                    const id = `toppings-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.toppingName}
                         checked={isChecked(item.toppingName, selectedToppings)}
                         onChange={() =>
@@ -879,17 +885,20 @@ function AddToCartModal({show, handleClose, product}) {
                         </div>
                       )}
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/* chrust*/}
               {menudetails?.chrust?.length > 0 && (
                 <div className="mt-4">
-                  <h5>chrust</h5>
-                  {menudetails.chrust.map((item, index) => (
+                  <h5>Chrust</h5>
+                  {menudetails.chrust.map((item, index) => {
+                    const id = `chrust-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.chrustName}
                         checked={selectedchrust.some(
                           (s) => s.chrustId === item.chrustId
@@ -897,17 +906,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleChrust(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/* Sauces */}
               {menudetails?.sauce?.length > 0 && (
                 <div className="mt-4">
                   <h5>Sauce</h5>
-                  {menudetails.sauce.map((item, index) => (
+                  {menudetails.sauce.map((item, index) => {
+                    const id = `sauces-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.sauce}
                         checked={selectedSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -915,17 +927,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSauce(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/* soda*/}
               {menudetails?.soda?.length > 0 && (
                 <div className="mt-4">
                   <h5>Soda</h5>
-                  {menudetails.soda.map((item, index) => (
+                  {menudetails.soda.map((item, index) => {
+                    const id = `soda-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.sodaName}
                         checked={selectedsoda.some(
                           (s) => s.sodaId === item.sodaId
@@ -933,17 +948,21 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSoda(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*style*/}
               {menudetails?.style?.length > 0 && (
                 <div className="mt-4">
                   <h5>Style</h5>
-                  {menudetails.style.map((item, index) => (
+                  {menudetails.style.map((item, index) => {
+                    
+                    const id = `style-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.styleName}
                         checked={selectedstyle.some(
                           (s) => s.styleId === item.styleId
@@ -951,17 +970,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleStyle(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*fish*/}
               {menudetails?.fish?.length > 0 && (
                 <div className="mt-4">
                   <h5>Fish</h5>
-                  {menudetails.fish.map((item, index) => (
+                  {menudetails.fish.map((item, index) => {
+                    const id = `fish-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.fishName}
                         checked={selectedfish.some(
                           (s) => s.fishId === item.fishId
@@ -969,17 +991,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleFish(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*side*/}
               {menudetails?.side?.length > 0 && (
                 <div className="mt-4">
-                  <h5>side</h5>
-                  {menudetails.side.map((item, index) => (
+                  <h5>Side</h5>
+                  {menudetails.side.map((item, index) => {
+                    const id = `side-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.sideName}
                         checked={selectedside.some(
                           (s) => s.sideId === item.sideId
@@ -987,17 +1012,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSide(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*ingredient*/}
               {menudetails?.ingredient?.length > 0 && (
                 <div className="mt-4">
                   <h5>ingredient</h5>
-                  {menudetails.ingredient.map((item, index) => (
+                  {menudetails.ingredient.map((item, index) => {
+                    const id = `ingredient-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.ingredientName}
                         checked={selectedingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1005,17 +1033,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleIngredient(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*meatpreparation*/}
               {menudetails?.meatpreparation?.length > 0 && (
                 <div className="mt-4">
                   <h5>meatpreparation</h5>
-                  {menudetails.meatpreparation.map((item, index) => (
+                  {menudetails.meatpreparation.map((item, index) => {
+                    const id = `meatpreparation-${index + 1}`;
+                    (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={item.meatpreparationName}
                         checked={selectedmeatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId
@@ -1023,17 +1054,20 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleMeatpreparation(item)}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra single*/}
               {menudetails?.extra?.length > 0 && (
                 <div className="mt-4">
                   <h5>extra</h5>
-                  {menudetails.extra.map((item, index) => (
+                  {menudetails.extra.map((item, index) => { 
+                    const id = `extra-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.extraName} - $${item.price}`}
                         checked={selectedextra.some(
                           (s) => s.extraId === item.extraId
@@ -1044,17 +1078,20 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*combotag single*/}
               {menudetails?.combotag?.length > 0 && (
                 <div className="mt-4">
                   <h5>Combo</h5>
-                  {menudetails.combotag.map((item, index) => (
+                  {menudetails.combotag.map((item, index) => {
+                    const id = `combo-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.combotagName} - $${item.price}`}
                         checked={selectedcombotag.some(
                           (s) => s.combotagId === item.combotagId
@@ -1065,7 +1102,7 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/* -----------------Extra Details------------------- */}              
@@ -1082,11 +1119,12 @@ function AddToCartModal({show, handleClose, product}) {
                     } catch (error) {
                       console.error("Invalid toppingDetails JSON", error);
                     }
-
+                    const id = `topping-${index + 1}`;
                     return (
                       <div key={index}>
                         <Form.Check
                           type="checkbox"
+                          id={id}
                           label={item.toppingName}
                           checked={isChecked(
                             item.toppingName,
@@ -1151,11 +1189,14 @@ function AddToCartModal({show, handleClose, product}) {
               {menudetails?.extrachrust?.length > 0 && (
                 <div className="mt-4">
                   <h5>chrust</h5>
-                  {menudetails.extrachrust.map((item, index) => (
+                  {menudetails.extrachrust.map((item, index) => {
+                    const id = `extra-chrust-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
                         label={`${item.chrustName} - $${item.price}`}
+                        id={id}
                         checked={selectedextraChrust.some(
                           (s) => s.chrustId === item.chrustId
                         )}
@@ -1165,17 +1206,20 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra Sauces */}
               {menudetails?.extrasauce?.length > 0 && (
                 <div className="mt-4">
                   <h5>Sauce</h5>
-                  {menudetails.extrasauce.map((item, index) => (
+                  {menudetails.extrasauce.map((item, index) => {
+                    const id = `extra-sauce-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.sauce} - $${item.price}`}
                         checked={selectedExtraSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -1186,18 +1230,21 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/* extrasoda*/}
               {menudetails?.extrasoda?.length > 0 && (
                 <div className="mt-4">
                   <h5>Soda</h5>
-                  {menudetails.extrasoda.map((item, index) => (
+                  {menudetails.extrasoda.map((item, index) => {
+                    const id = `extra-soda-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
                         label={`${item.sodaName} - $${item.price}`}
+                        id={id}
                         checked={selectedExtrasoda.some(
                           (s) => s.sodaId === item.sodaId
                         )}
@@ -1207,7 +1254,7 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra style*/}
@@ -1216,10 +1263,12 @@ function AddToCartModal({show, handleClose, product}) {
                   <h5>Style</h5>
                   {menudetails.extrastyle.map((item, index) => {
                     const updatedPrice = (item.price * itemsizeIndex).toFixed(2);
+                    const id = `extra-style-${index + 1}`;
                     return (
                       <div key={index}>
                         <Form.Check
                           type="checkbox"
+                          id={id}
                           label={`${item.styleName} - $${updatedPrice}`}
                           checked={selectedexrastyle.some(
                             (s) => s.styleId === item.styleId
@@ -1240,10 +1289,13 @@ function AddToCartModal({show, handleClose, product}) {
               {menudetails?.extrafish?.length > 0 && (
                 <div className="mt-4">
                   <h5>Fish</h5>
-                  {menudetails.extrafish.map((item, index) => (
+                  {menudetails.extrafish.map((item, index) => {
+                    const id = `extra-fish-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.fishName} - $${item.price}`}
                         checked={selectedextrafish.some(
                           (s) => s.fishId === item.fishId
@@ -1254,17 +1306,20 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra side*/}
               {menudetails?.extraside?.length > 0 && (
                 <div className="mt-4">
                   <h5>side</h5>
-                  {menudetails.extraside.map((item, index) => (
+                  {menudetails.extraside.map((item, index) => {
+                    const id = `extra-side-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.sideName} - $${item.price}`}
                         checked={selectedextraside.some(
                           (s) => s.sideId === item.sideId
@@ -1275,17 +1330,20 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra ingredient*/}
               {menudetails?.extraingredient?.length > 0 && (
                 <div className="mt-4">
                   <h5>ingredient</h5>
-                  {menudetails.extraingredient.map((item, index) => (
+                  {menudetails.extraingredient.map((item, index) => {
+                    const id = `extra-ingredient-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.ingredientName} - $${item.price}`}
                         checked={selectedextraingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1296,17 +1354,20 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
               {/*Extra meatpreparation*/}
               {menudetails?.extrameatpreparation?.length > 0 && (
                 <div className="mt-4">
                   <h5>meatpreparation</h5>
-                  {menudetails.extrameatpreparation.map((item, index) => (
+                  {menudetails.extrameatpreparation.map((item, index) => {
+                    const id = `extra-meatpreparation-${index + 1}`;
+                    return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
+                        id={id}
                         label={`${item.meatpreparationName} - $${item.price}`}
                         checked={selectedextrameatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId
@@ -1317,7 +1378,7 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  ))}
+                  )})}
                 </div>
               )}
                 </Col>
