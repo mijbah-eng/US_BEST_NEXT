@@ -1,24 +1,31 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import basecatagories from "../../../../utility/config";
 import { mainmenu } from "../../../../utility/slice/GetCategoryMenumain";
 import DishesCard from "../DishesCard/DishesCard";
 import CategoryTab from "./CategoryTab";
+import { useSearchParams } from "next/navigation"
 
 const BestSelling4 = () => {
+  const searchParams = useSearchParams();
+  const dispatch = useDispatch();
+  const catId = searchParams.get("categoryId"); // ⬅️ get parameter value
   const [isActive, setIsActive] = useState("FastFood");
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [item, setItem] = useState([]); // now stores categories with menu
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const dispatch = useDispatch();
+  const menuRef = useRef(null);
+  useEffect(() => {
+    const catId = searchParams.get("categoryId");
+    setSelectedCategoryId(catId);
+    handleCategorySelect(catId);
+  }, [searchParams]);
 
   // get categoryId from localStorage
   useEffect(() => {
@@ -75,8 +82,17 @@ const BestSelling4 = () => {
         },
       ]);
     }
+    scrollToMenu();
   };
 
+  const scrollToMenu = () => {
+    if (menuRef.current) {
+      const offset = 120; // adjust based on header height
+      const y = menuRef.current.getBoundingClientRect().top + window.scrollY - offset;
+
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
   const allProductShow = () => {
     setSelectedCategory(null);
     const allCategories = itemCategorymenu.map((cat) => ({
@@ -153,175 +169,48 @@ const BestSelling4 = () => {
               onCategorySelect={handleCategorySelect}
               selectedCategoryId={selectedCategoryId}
             />
-            {/* <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
-              <li
-                className={`nav-item ${
-                  isActive === "FastFood" ? "active" : ""
-                }`}
-                onClick={() => setIsActive("FastFood")}
-                role="presentation"
-              >
-                <button
-                  className="nav-link"
-                  id="pills-FastFood-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-FastFood"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-FastFood"
-                  aria-selected="true"
-                >
-                  <Image
-                    src="/assets/img/menu/menuIcon1_1.png"
-                    alt="img"
-                    width={36}
-                    height={36}
-                  />
-                  Fast Food
-                </button>
-              </li>
-              <li
-                className={`nav-item ${
-                  isActive === "DrinkJuice" ? "active" : ""
-                }`}
-                onClick={() => setIsActive("DrinkJuice")}
-                role="presentation"
-              >
-                <button
-                  className="nav-link"
-                  id="pills-drinkJuice-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-drinkJuice"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-drinkJuice"
-                  aria-selected="false"
-                >
-                  <Image
-                    src="/assets/img/menu/menuIcon1_2.png"
-                    alt="img"
-                    width={36}
-                    height={36}
-                  />
-                  Drink & Juice
-                </button>
-              </li>
-              <li
-                className={`nav-item ${
-                  isActive === "ChickenPizza" ? "active" : ""
-                }`}
-                onClick={() => setIsActive("ChickenPizza")}
-                role="presentation"
-              >
-                <button
-                  className="nav-link"
-                  id="pills-chickenPizza-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-chickenPizza"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-chickenPizza"
-                  aria-selected="false"
-                >
-                  <Image
-                    src="/assets/img/menu/menuIcon1_3.png"
-                    alt="img"
-                    width={36}
-                    height={36}
-                  />
-                  Chicken Pizza
-                </button>
-              </li>
-              <li
-                className={`nav-item ${
-                  isActive === "FreshPasta" ? "active" : ""
-                }`}
-                onClick={() => setIsActive("FreshPasta")}
-                role="presentation"
-              >
-                <button
-                  className="nav-link"
-                  id="pills-freshPasta-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-freshPasta"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-freshPasta"
-                  aria-selected="false"
-                >
-                  <Image
-                    src="/assets/img/menu/menuIcon1_4.png"
-                    alt="img"
-                    width={36}
-                    height={36}
-                  />
-                  Fresh Pasta
-                </button>
-              </li>
-            </ul> */}
-           {/* content */}
-            <div className="tab-content">
-              {/* FAST FOOD */}
+
+            {/* content */}
+            <div className="tab-content" ref={menuRef}>
               {item?.length > 0
                 ? item.map((cat, catIndex) => (
-                    <div className="tab-pane active" key={cat.categoryName}>
-                      <div className="food-title">
-                        <h2>{cat.categoryName}</h2>
-                      </div>
-
-                      <div className="dishes-card-wrap style1">
-                        {cat?.menu?.length > 0
-                          ? cat.menu.map((item, index) => {
-                              const imageUrl = `${basecatagories}menu/${encodeURIComponent(
-                                item.image
-                              )}`;
-
-                              return (
-                                <DishesCard
-                                  show={showModal}
-                                  handleClose={handleCloseModal}
-                                  product={selectedProduct}
-                                  item={item}
-                                  imageUrl={imageUrl}
-                                  key={index}
-                                  handleAddToCartClick={handleAddToCartClick}
-                                  setSelectedProduct={setSelectedProduct}
-                                />
-                              );
-                            })
-                          : "Data Not Found"}
-                      </div>
+                  <div className="tab-pane active" key={cat.categoryName}>
+                    <div className="food-title">
+                      <h2>{cat.categoryName}</h2>
                     </div>
-                  ))
+
+                    <div className="dishes-card-wrap style1">
+                      {cat?.menu?.length > 0
+                        ? cat.menu.map((item, index) => {
+                          const imageUrl = `${basecatagories}menu/${encodeURIComponent(
+                            item.image
+                          )}`;
+
+                          return (
+                            <DishesCard
+                              show={showModal}
+                              handleClose={handleCloseModal}
+                              product={selectedProduct}
+                              item={item}
+                              imageUrl={imageUrl}
+                              key={index}
+                              handleAddToCartClick={handleAddToCartClick}
+                              setSelectedProduct={setSelectedProduct}
+                            />
+                          );
+                        })
+                        : "Data Not Found"}
+                    </div>
+                  </div>
+                ))
                 : "Category Not Found"}
             </div>
           </div>
-          <div className="btn-wrapper  wow fadeInUp" data-wow-delay="0.9s">
-                      <Link className="theme-btn" href="/menu2">
-                        VIEW ALL ITEM <i className="bi bi-arrow-right"></i>
-                      </Link>
-          </div>
-          {/* <div className="dishes-card-wrap style1 best-selling-area">
-                {foodItems.map((item, i) => (
-                    <div key={i} className="dishes-card style1 wow fadeInUp" data-wow-delay="0.2s">
-                        <div className="dishes-thumb">
-                        <Image src={item.img} alt="img" width={158} height={158}   />
-                        </div>
-                        <Link href="/menu">
-                            <h3>{item.title}</h3>
-                        </Link>
-                        <p>{item.content}</p>
-                        <h6>{item.price}</h6>
-                        <div className="social-profile">
-                            <span className="plus-btn"> <Link href="#"> <i className="bi bi-heart"></i></Link></span>
-                            <ul>
-                                <li><Link href="/cart"><i className="bi bi-basket2"></i></Link></li>
-                                <li><Link href="/cart"><i className="bi bi-eye"></i></Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    ))}
-                </div> */}
+          {/* <div className="btn-wrapper  wow fadeInUp" data-wow-delay="0.9s">
+            <Link className="theme-btn" href="/menu2">
+              VIEW ALL ITEM <i className="bi bi-arrow-right"></i>
+            </Link>
+          </div> */}
         </div>
       </div>
     </section>

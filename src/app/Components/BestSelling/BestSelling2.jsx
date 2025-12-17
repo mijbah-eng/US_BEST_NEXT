@@ -37,19 +37,19 @@ const BestSelling2 = () => {
                                             src="/assets/img/food-items/circleShape.png" alt="img" width={158} height={158}   /></div>
                                 </div>
                                 <div className="dishes-content">
-                                    <Link href="/menu">
+                                    <Link href="/menu2">
                                         <h3>{item.title}</h3>
                                     </Link>
                                     <div className="star"><Image src="/assets/img/icon/star2.svg" alt="img" width={86} height={16}   /></div>
                                     <div className="text">{item.content}</div>
                                     <h6>{item.price}</h6>
-                                    <Link href="/menu" className="theme-btn style6"> Order Now <i className="bi bi-basket2"></i></Link>
+                                    <Link href="/menu2" className="theme-btn style6"> Order Now <i className="bi bi-basket2"></i></Link>
                                 </div>
                             </div>
                              ))}
                         </div>
                         <div className="btn-wrapper">
-                            <Link className="theme-btn" href="/menu"> VIEW ALL ITEM <i className="bi bi-arrow-right"></i></Link>
+                            <Link className="theme-btn" href="/menu2"> VIEW ALL ITEM <i className="bi bi-arrow-right"></i></Link>
                         </div>
 
                     </div>

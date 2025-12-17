@@ -1,16 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
-
 const firebaseConfig = {
-    apiKey: "AIzaSyAiYaePJrRnfEApXLqUPL2gNW5zGIOgHto",
-    authDomain: "safa-halal-resturant.firebaseapp.com",
-    projectId: "safa-halal-resturant",
-    storageBucket: "safa-halal-resturant.firebasestorage.app",
-    messagingSenderId: "397331949238",
-    appId: "1:397331949238:web:1bce555c3d2e41b3f2e817",
-    measurementId: "G-HV2DCEEZZR"
-  };
+  apiKey: "AIzaSyA7cR_zGpkc-tfciV1yRl4UUIj-HgrBF_k",
+  authDomain: "usbest-chicken.firebaseapp.com",
+  projectId: "usbest-chicken",
+  storageBucket: "usbest-chicken.firebasestorage.app",
+  messagingSenderId: "877045058492",
+  appId: "1:877045058492:web:e227c4789eb1d5c0c0b9b9",
+  measurementId: "G-M6DEHJBFHK"
+};
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);

@@ -9,8 +9,8 @@ import DishesCard from "../DishesCard/DishesCard";
 import CategoryTab from "./CategoryTab";
 
 const BestSelling1 = () => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState("FastFood");
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -18,7 +18,6 @@ const BestSelling1 = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const dispatch = useDispatch();
 
   // get categoryId from localStorage
   useEffect(() => {
@@ -48,9 +47,7 @@ const BestSelling1 = () => {
     dispatch(mainmenu());
   }, [dispatch]);
 
-  const { itemCategorymenu, loading } = useSelector(
-    (state) => state.itemCategorymenu
-  );
+  const { itemCategorymenu, loading } = useSelector((state) => state.itemCategorymenu);
 
   useEffect(() => {
     if (categoryId && itemCategorymenu.length > 0) {
@@ -97,7 +94,6 @@ const BestSelling1 = () => {
     setShowModal(false);
     setSelectedProduct(null);
   };
-  console.log("item =>", item);
 
   return (
     <section className="popular-dishes-section fix section-padding">

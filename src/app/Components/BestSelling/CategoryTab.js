@@ -15,7 +15,7 @@ function CategoryTab({
       setselectcategoryId(selectedCategoryId);
     } else if (data.length > 0) {
       setselectcategoryId(data[0].categoryId);
-      onCategorySelect?.(data[0].categoryId);
+      // onCategorySelect?.(data[0].categoryId);
     }
   }, [selectedCategoryId, data, onCategorySelect]);
   return (

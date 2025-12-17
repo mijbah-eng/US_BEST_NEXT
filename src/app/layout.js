@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="author" content="Themeservices" />
+        <base href="/" />
         <link rel="icon" type="image/png" href="/favicon.png" sizes="any" />
       </head>
       <body className={`${epilogue.variable} ${roboto.variable}`}>

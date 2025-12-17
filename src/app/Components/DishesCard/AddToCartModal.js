@@ -10,8 +10,9 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import basecatagories, { base_url, resturantId } from "../../../../utility/config";
 import { auth } from "../../../../utility/firebase/firebase";
+import Loader from "../Loader/Loader";
 
-function AddToCartModal({show, handleClose, product}) {
+function AddToCartModal({ show, handleClose, product }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [menu, setMenu] = useState({});
@@ -44,7 +45,7 @@ function AddToCartModal({show, handleClose, product}) {
   const [pendingCartPayload, setPendingCartPayload] = useState(null);
   const [itemsizeIndex, setitemsizeindex] = useState(1);
 
-   useEffect(() => {
+  useEffect(() => {
     if (product?.menuId) {
       fetchMenuDetails();
     }
@@ -63,18 +64,24 @@ function AddToCartModal({show, handleClose, product}) {
           customtype: "Regular",
           cprice: response.data?.menu.price,
         });
+      } else {
+        handleSizeSelection({
+          customtype: response.data?.menu.customeType[0]?.customtype,
+          cprice: response.data?.menu.customeType[0]?.cprice,
+          saucecount:response.data?.menu.customeType[0]?.saucecount
+        });
       }
     } catch (error) {
       console.error("Error fetching menu details:", error);
     }
   };
 
-   const handleSizeSelection = (size) => {
+  const handleSizeSelection = (size) => {
     setSelectedSize(size);
     setSelectedSauces([]);
   };
 
-   const toggleTopping = (
+  const toggleTopping = (
     toppingName,
     toppingList,
     selectedList,
@@ -117,11 +124,11 @@ function AddToCartModal({show, handleClose, product}) {
   const isChecked = (name, selectedList) =>
     selectedList.some((t) => t.name === name);
 
-    const getPlacement = (name, selectedList) =>
+  const getPlacement = (name, selectedList) =>
     selectedList.find((t) => t.name === name)?.type || "Whole";
 
 
-      const toggleSauce = (sauce) => {
+  const toggleSauce = (sauce) => {
     const sauceLimit = Number(selectedSize?.saucecount);
     const exists = selectedSauces.find((s) => s.sauceId === sauce.sauceId);
     if (exists) {
@@ -155,7 +162,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
   // sause handel
-    const toggleExtraSauce = (sauce) => {
+  const toggleExtraSauce = (sauce) => {
     const exists = selectedExtraSauces.find((s) => s.sauceId === sauce.sauceId);
     if (exists) {
       setSelectedextraSauces((prev) =>
@@ -172,8 +179,8 @@ function AddToCartModal({show, handleClose, product}) {
       ]);
     }
   };
-    // extrasoda handel
-    const toggleExtraSoda = (soda) => {
+  // extrasoda handel
+  const toggleExtraSoda = (soda) => {
     const exists = selectedExtrasoda.find((s) => s.sodaId === soda.sodaId);
     if (exists) {
       setSelectedExtrasoda((prev) =>
@@ -208,7 +215,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // style handel
+  // style handel
   const toggleStyle = (style) => {
     const exists = selectedstyle.find((s) => s.styleId === style.styleId);
     if (exists) {
@@ -227,7 +234,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    //Extrastyle handel
+  //Extrastyle handel
   const toggleExtraStyle = (style) => {
     const exists = selectedexrastyle.find((s) => s.styleId === style.styleId);
     if (exists) {
@@ -246,7 +253,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // Fish handel
+  // Fish handel
   const toggleFish = (fish) => {
     const exists = selectedfish.find((s) => s.fishId === fish.fishId);
     if (exists) {
@@ -264,7 +271,7 @@ function AddToCartModal({show, handleClose, product}) {
   };
 
 
-    // ExtraFish handel
+  // ExtraFish handel
   const toggleExtraFish = (fish) => {
     const exists = selectedextrafish.find((s) => s.fishId === fish.fishId);
     if (exists) {
@@ -284,7 +291,7 @@ function AddToCartModal({show, handleClose, product}) {
   };
 
 
-    // chrust handel
+  // chrust handel
   const toggleChrust = (chrust) => {
     const exists = selectedchrust.find((s) => s.chrustId === chrust.chrustId);
     if (exists) {
@@ -304,7 +311,7 @@ function AddToCartModal({show, handleClose, product}) {
   };
 
 
-    // Extrachrust handel
+  // Extrachrust handel
   const toggleExtraChrust = (chrust) => {
     const exists = selectedextraChrust.find(
       (s) => s.chrustId === chrust.chrustId
@@ -344,7 +351,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // side handle
+  // side handle
   const toggleSide = (side) => {
     const exists = selectedside.find((s) => s.sideId === side.sideId);
     if (exists) {
@@ -361,7 +368,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // Extraside handle
+  // Extraside handle
   const toggleextraSide = (side) => {
     const exists = selectedextraside.find((s) => s.sideId === side.sideId);
     if (exists) {
@@ -380,7 +387,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // ingredient handle
+  // ingredient handle
   const toggleIngredient = (ingredient) => {
     const exists = selectedingredient.find(
       (s) => s.ingredientId === ingredient.ingredientId
@@ -401,7 +408,7 @@ function AddToCartModal({show, handleClose, product}) {
     }
   };
 
-    // Extraingredient handle
+  // Extraingredient handle
   const toggleextraIngredient = (ingredient) => {
     const exists = selectedextraingredient.find(
       (s) => s.ingredientId === ingredient.ingredientId
@@ -527,7 +534,7 @@ function AddToCartModal({show, handleClose, product}) {
     setTotalprice(Number.isFinite(total) ? parseFloat(total.toFixed(2)) : 0);
   };
 
-    useEffect(() => {
+  useEffect(() => {
     calculateTotalPrice();
   }, [
     selectedSize,
@@ -614,13 +621,13 @@ function AddToCartModal({show, handleClose, product}) {
     });
 
     let userLog = localStorage.getItem('userLog');
-    if(!user){
-      console.log(userLog);      
+    if (!user) {
+      console.log(userLog);
       if (!userLog) {
         setPendingCartPayload(payload);
         setShowLoginModal(true);
         return;
-      }else{
+      } else {
         await addToCartApi(payload, null);
       }
     }
@@ -631,7 +638,7 @@ function AddToCartModal({show, handleClose, product}) {
   const proceedWithAddToCart = async (user, payload) => {
     try {
       const idToken = await user.getIdToken();
-      localStorage.setItem('userLog','LoginUser');
+      localStorage.setItem('userLog', 'LoginUser');
       localStorage.setItem("id_token", idToken);
 
       let token = localStorage.getItem("jwt_token");
@@ -665,7 +672,7 @@ function AddToCartModal({show, handleClose, product}) {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      localStorage.setItem('userLog','LoginUser');
+      localStorage.setItem('userLog', 'LoginUser');
       await proceedWithAddToCart(user, pendingCartPayload);
       setPendingCartPayload(null);
     } catch (error) {
@@ -674,7 +681,7 @@ function AddToCartModal({show, handleClose, product}) {
   };
 
   const ContinueAsGuest = async () => {
-    localStorage.setItem('userLog','Guest');
+    localStorage.setItem('userLog', 'Guest');
     await addToCartApi(pendingCartPayload, null);
     setShowLoginModal(false);
     setPendingCartPayload(null);
@@ -683,7 +690,7 @@ function AddToCartModal({show, handleClose, product}) {
   const addToCartApi = async (item, token) => {
     const uuid = Cookies.get("uuid");
     console.log(item);
-    
+
     try {
       setLoading(true);
       let id_token = localStorage.getItem("id_token");
@@ -699,6 +706,7 @@ function AddToCartModal({show, handleClose, product}) {
         idToken: id_token,
       });
       if (res.status) {
+        handleClose();
         setLoading(false);
         Swal.fire({
           icon: "success",
@@ -707,7 +715,7 @@ function AddToCartModal({show, handleClose, product}) {
           confirmButtonText: "Go to Cart",
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push("/shop-cart");
+            router.push("/shop/cart");
           }
         });
       } else {
@@ -730,10 +738,10 @@ function AddToCartModal({show, handleClose, product}) {
   } else {
     try {
       const priceArray = menu.customeType;
-      if (priceArray?.length) {
-        priceDisplay = `$${priceArray[0].cprice} - $${
-          priceArray[priceArray.length - 1].cprice
-        }`;
+      if (priceArray?.length > 1) {
+        priceDisplay = `$${priceArray[0].cprice} - $${priceArray[priceArray.length - 1].cprice}`;
+      } else {
+        priceDisplay = `$${priceArray?.[0]?.cprice}`;
       }
     } catch (err) {
       priceDisplay = "Price not available";
@@ -741,7 +749,7 @@ function AddToCartModal({show, handleClose, product}) {
   }
 
 
-     const increase = () => {
+  const increase = () => {
     setquantity(quantity + 1);
   };
 
@@ -752,82 +760,83 @@ function AddToCartModal({show, handleClose, product}) {
       setquantity(quantity - 1);
     }
   };
-    return ( <>
+  return (<>
     {loading && <Loader />}
     <Modal show={show} onHide={handleClose} size="lg" centered>
-        <Modal.Header>
-            <Modal.Title>
-                <button className="btn-close" type="button" dismiss="modal" onClick={handleClose}></button>
-            </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-            <Row>
-                <Col md={6}>
-                <div className="modal-thumb">
-                    <div className="product-big-img bg-color2">
-                        <div className="dishes-modal-thumb">
-                    <img src={imageUrl} alt={menu?.menuName} />
+      <Modal.Header>
+        <Modal.Title>
+          <button className="btn-close" type="button" dismiss="modal" onClick={handleClose}></button>
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Row>
+          <Col md={6}>
+            <div className="modal-thumb">
+              <div className="product-big-img bg-color2">
+                <div className="dishes-modal-thumb">
+                  <img src={imageUrl} alt={menu?.menuName} />
 
-                        </div>
-                    </div>
                 </div>
-                <div className="modal-details">
-                    <div className="product-about">
-                        <div className="title-wrapper">
-                            <h2 className="product-title">{menu?.menuName}</h2>
-                            <h5 className="price">{totalPrice === 0 ? priceDisplay : `$ ${totalPrice}`}</h5>
-                            <p className="text-muted">{menu?.description}</p>
-                        </div>
-                    </div>
+              </div>
+            </div>
+            <div className="modal-details">
+              <div className="product-about">
+                <div className="title-wrapper">
+                  <h2 className="product-title">{menu?.menuName}</h2>
+                  <h5 className="price">{totalPrice === 0 ? priceDisplay : `$ ${totalPrice}`}</h5>
+                  <p className="text-muted">{menu?.description}</p>
                 </div>
-                </Col>
-                <Col md={6} className="list_box">
-                <div>
-                <h2>Item Options</h2>
-                <p>Required - Choose one.</p>
-                <h5>Select Size</h5>
-                {menu.type === "custom" && menu.customeType?.length > 0 ? (
-                  menu.customeType.map((m, index) => {
-                    const id = `size-${index + 1}`;
-                    return (
+              </div>
+            </div>
+          </Col>
+          <Col md={6} className="list_box">
+            <div>
+              <h2>Item Options</h2>
+              <h5>Select Size</h5>
+              {menu.type === "custom" && menu.customeType?.length > 0 ? (
+                menu.customeType.map((m, index) => {
+                  const id = `size-${index + 1}`;
+                  return (
                     <Form.Check
                       key={index}
                       type="radio"
                       name="size"
                       id={id}
                       label={`${m.customtype} - $${m.cprice}`}
+                      defaultChecked={index === 0}
                       onChange={() => {
                         handleSizeSelection(m);
-                        setitemsizeindex(index+1);
+                        setitemsizeindex(index + 1);
                         calculateTotalPrice();
                       }}
                     />
-                  )})
-                ) : (
-                  <Form.Check
-                    type="radio"
-                    name="size"
-                    label={`Regular - $${menu.price}`}
-                    defaultChecked
-                    onChange={() => {
-                      handleSizeSelection({
-                        customtype: "Regular",
-                        cprice: menu.price,
-                      });
-                      setitemsizeindex(1);
-                      calculateTotalPrice();
-                    }}
-                  />
-                )}
-              </div>
+                  )
+                })
+              ) : (
+                <Form.Check
+                  type="radio"
+                  name="size"
+                  label={`Regular - $${menu.price}`}
+                  defaultChecked
+                  onChange={() => {
+                    handleSizeSelection({
+                      customtype: "Regular",
+                      cprice: menu.price,
+                    });
+                    setitemsizeindex(1);
+                    calculateTotalPrice();
+                  }}
+                />
+              )}
+            </div>
 
-               {/* Regular Toppings */}
-              {menudetails?.topping?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Toppings</h5>
-                  {menudetails.topping.map((item, index) => {
-                    const id = `toppings-${index + 1}`;
-                    return (
+            {/* Regular Toppings */}
+            {menudetails?.topping?.length > 0 && (
+              <div className="mt-4">
+                <h5>Toppings</h5>
+                {menudetails.topping.map((item, index) => {
+                  const id = `toppings-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -852,14 +861,13 @@ function AddToCartModal({show, handleClose, product}) {
                                   key={idx}
                                   id={`placement-${item.toppingName}-${idx}`}
                                   type="radio"
-                                  className={`custom-toggle me-2 ${
-                                    getPlacement(
-                                      item.toppingName,
-                                      selectedToppings
-                                    ) === option
-                                      ? "selected"
-                                      : ""
-                                  }`}
+                                  className={`custom-toggle me-2 ${getPlacement(
+                                    item.toppingName,
+                                    selectedToppings
+                                  ) === option
+                                    ? "selected"
+                                    : ""
+                                    }`}
                                   name={`placement-${item.toppingName}`}
                                   value={option}
                                   checked={
@@ -885,16 +893,17 @@ function AddToCartModal({show, handleClose, product}) {
                         </div>
                       )}
                     </div>
-                  )})}
-                </div>
-              )}
-              {/* chrust*/}
-              {menudetails?.chrust?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Chrust</h5>
-                  {menudetails.chrust.map((item, index) => {
-                    const id = `chrust-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/* chrust*/}
+            {menudetails?.chrust?.length > 0 && (
+              <div className="mt-4">
+                <h5>Chrust</h5>
+                {menudetails.chrust.map((item, index) => {
+                  const id = `chrust-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -906,16 +915,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleChrust(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/* Sauces */}
-              {menudetails?.sauce?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Sauce</h5>
-                  {menudetails.sauce.map((item, index) => {
-                    const id = `sauces-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/* Sauces */}
+            {menudetails?.sauce?.length > 0 && (
+              <div className="mt-4">
+                <h5>Sauce</h5>
+                {menudetails.sauce.map((item, index) => {
+                  const id = `sauces-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -927,16 +937,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSauce(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/* soda*/}
-              {menudetails?.soda?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Soda</h5>
-                  {menudetails.soda.map((item, index) => {
-                    const id = `soda-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/* soda*/}
+            {menudetails?.soda?.length > 0 && (
+              <div className="mt-4">
+                <h5>Soda</h5>
+                {menudetails.soda.map((item, index) => {
+                  const id = `soda-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -948,17 +959,18 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSoda(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*style*/}
-              {menudetails?.style?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Style</h5>
-                  {menudetails.style.map((item, index) => {
-                    
-                    const id = `style-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*style*/}
+            {menudetails?.style?.length > 0 && (
+              <div className="mt-4">
+                <h5>Style</h5>
+                {menudetails.style.map((item, index) => {
+
+                  const id = `style-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -970,16 +982,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleStyle(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*fish*/}
-              {menudetails?.fish?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Fish</h5>
-                  {menudetails.fish.map((item, index) => {
-                    const id = `fish-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*fish*/}
+            {menudetails?.fish?.length > 0 && (
+              <div className="mt-4">
+                <h5>Fish</h5>
+                {menudetails.fish.map((item, index) => {
+                  const id = `fish-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -991,16 +1004,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleFish(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*side*/}
-              {menudetails?.side?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Side</h5>
-                  {menudetails.side.map((item, index) => {
-                    const id = `side-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*side*/}
+            {menudetails?.side?.length > 0 && (
+              <div className="mt-4">
+                <h5>Side</h5>
+                {menudetails.side.map((item, index) => {
+                  const id = `side-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1012,16 +1026,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleSide(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*ingredient*/}
-              {menudetails?.ingredient?.length > 0 && (
-                <div className="mt-4">
-                  <h5>ingredient</h5>
-                  {menudetails.ingredient.map((item, index) => {
-                    const id = `ingredient-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*ingredient*/}
+            {menudetails?.ingredient?.length > 0 && (
+              <div className="mt-4">
+                <h5>ingredient</h5>
+                {menudetails.ingredient.map((item, index) => {
+                  const id = `ingredient-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1033,16 +1048,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleIngredient(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*meatpreparation*/}
-              {menudetails?.meatpreparation?.length > 0 && (
-                <div className="mt-4">
-                  <h5>meatpreparation</h5>
-                  {menudetails.meatpreparation.map((item, index) => {
-                    const id = `meatpreparation-${index + 1}`;
-                    (
+                  )
+                })}
+              </div>
+            )}
+            {/*meatpreparation*/}
+            {menudetails?.meatpreparation?.length > 0 && (
+              <div className="mt-4">
+                <h5>meatpreparation</h5>
+                {menudetails.meatpreparation.map((item, index) => {
+                  const id = `meatpreparation-${index + 1}`;
+                  (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1054,16 +1070,17 @@ function AddToCartModal({show, handleClose, product}) {
                         onChange={() => toggleMeatpreparation(item)}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra single*/}
-              {menudetails?.extra?.length > 0 && (
-                <div className="mt-4">
-                  <h5>extra</h5>
-                  {menudetails.extra.map((item, index) => { 
-                    const id = `extra-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra single*/}
+            {menudetails?.extra?.length > 0 && (
+              <div className="mt-4">
+                <h5>extra</h5>
+                {menudetails.extra.map((item, index) => {
+                  const id = `extra-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1078,16 +1095,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*combotag single*/}
-              {menudetails?.combotag?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Combo</h5>
-                  {menudetails.combotag.map((item, index) => {
-                    const id = `combo-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*combotag single*/}
+            {menudetails?.combotag?.length > 0 && (
+              <div className="mt-4">
+                <h5>Combo</h5>
+                {menudetails.combotag.map((item, index) => {
+                  const id = `combo-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1102,96 +1120,96 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/* -----------------Extra Details------------------- */}              
-              {menudetails?.extratopping?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Toppings</h5>
-                  {menudetails.extratopping.map((item, index) => {
-                    // Parse toppingDetails safely
-                    let toppingOptions = [];
-                    try {
-                      toppingOptions = item.toppingDetails
-                        ? JSON.parse(item.toppingDetails)
-                        : [];
-                    } catch (error) {
-                      console.error("Invalid toppingDetails JSON", error);
-                    }
-                    const id = `topping-${index + 1}`;
-                    return (
-                      <div key={index}>
-                        <Form.Check
-                          type="checkbox"
-                          id={id}
-                          label={item.toppingName}
-                          checked={isChecked(
-                            item.toppingName,
-                            selectedExtraToppings
-                          )}
-                          onChange={() =>
-                            toggleTopping(
-                              item.toppingName,
-                              menudetails.extratopping,
-                              selectedExtraToppings,
-                              setSelectedExtraToppings
-                            )
-                          }
-                        />
-
-                        {isChecked(item.toppingName, selectedExtraToppings) && (
-                          <div className="ms-3 mt-1">
-                            <ButtonGroup>
-                              {toppingOptions.map((option, idx) => (
-                                <ToggleButton
-                                  key={idx}
-                                  id={`extratopping-${item.toppingName}-${idx}`}
-                                  type="radio"
-                                  className={`custom-toggle me-2 ${
-                                    getPlacement(
-                                      item.toppingName,
-                                      selectedExtraToppings
-                                    ) === option.type
-                                      ? "selected"
-                                      : ""
-                                  }`}
-                                  name={`extratopping-${item.toppingName}`}
-                                  value={option.type}
-                                  checked={
-                                    getPlacement(
-                                      item.toppingName,
-                                      selectedExtraToppings
-                                    ) === option.type
-                                  }
-                                  onChange={() =>
-                                    updatePlacement(
-                                      item.toppingName,
-                                      option.type,
-                                      option.price,
-                                      selectedExtraToppings,
-                                      setSelectedExtraToppings
-                                    )
-                                  }
-                                >
-                                  {option.type} (${option.price})
-                                </ToggleButton>
-                              ))}
-                            </ButtonGroup>
-                          </div>
+                  )
+                })}
+              </div>
+            )}
+            {/* -----------------Extra Details------------------- */}
+            {menudetails?.extratopping?.length > 0 && (
+              <div className="mt-4">
+                <h5>Toppings</h5>
+                {menudetails.extratopping.map((item, index) => {
+                  // Parse toppingDetails safely
+                  let toppingOptions = [];
+                  try {
+                    toppingOptions = item.toppingDetails
+                      ? JSON.parse(item.toppingDetails)
+                      : [];
+                  } catch (error) {
+                    console.error("Invalid toppingDetails JSON", error);
+                  }
+                  const id = `topping-${index + 1}`;
+                  return (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        id={id}
+                        label={item.toppingName}
+                        checked={isChecked(
+                          item.toppingName,
+                          selectedExtraToppings
                         )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              {/*Extra chrust*/}
-              {menudetails?.extrachrust?.length > 0 && (
-                <div className="mt-4">
-                  <h5>chrust</h5>
-                  {menudetails.extrachrust.map((item, index) => {
-                    const id = `extra-chrust-${index + 1}`;
-                    return (
+                        onChange={() =>
+                          toggleTopping(
+                            item.toppingName,
+                            menudetails.extratopping,
+                            selectedExtraToppings,
+                            setSelectedExtraToppings
+                          )
+                        }
+                      />
+
+                      {isChecked(item.toppingName, selectedExtraToppings) && (
+                        <div className="ms-3 mt-1">
+                          <ButtonGroup>
+                            {toppingOptions.map((option, idx) => (
+                              <ToggleButton
+                                key={idx}
+                                id={`extratopping-${item.toppingName}-${idx}`}
+                                type="radio"
+                                className={`custom-toggle me-2 ${getPlacement(
+                                  item.toppingName,
+                                  selectedExtraToppings
+                                ) === option.type
+                                  ? "selected"
+                                  : ""
+                                  }`}
+                                name={`extratopping-${item.toppingName}`}
+                                value={option.type}
+                                checked={
+                                  getPlacement(
+                                    item.toppingName,
+                                    selectedExtraToppings
+                                  ) === option.type
+                                }
+                                onChange={() =>
+                                  updatePlacement(
+                                    item.toppingName,
+                                    option.type,
+                                    option.price,
+                                    selectedExtraToppings,
+                                    setSelectedExtraToppings
+                                  )
+                                }
+                              >
+                                {option.type} (${option.price})
+                              </ToggleButton>
+                            ))}
+                          </ButtonGroup>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {/*Extra chrust*/}
+            {menudetails?.extrachrust?.length > 0 && (
+              <div className="mt-4">
+                <h5>chrust</h5>
+                {menudetails.extrachrust.map((item, index) => {
+                  const id = `extra-chrust-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1206,16 +1224,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra Sauces */}
-              {menudetails?.extrasauce?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Sauce</h5>
-                  {menudetails.extrasauce.map((item, index) => {
-                    const id = `extra-sauce-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra Sauces */}
+            {menudetails?.extrasauce?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Sauce</h5>
+                {menudetails.extrasauce.map((item, index) => {
+                  const id = `extra-sauce-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1230,16 +1249,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/* extrasoda*/}
-              {menudetails?.extrasoda?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Soda</h5>
-                  {menudetails.extrasoda.map((item, index) => {
-                    const id = `extra-soda-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/* extrasoda*/}
+            {menudetails?.extrasoda?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Soda</h5>
+                {menudetails.extrasoda.map((item, index) => {
+                  const id = `extra-soda-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1254,44 +1274,45 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra style*/}
-              {menudetails?.extrastyle?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Style</h5>
-                  {menudetails.extrastyle.map((item, index) => {
-                    const updatedPrice = (item.price * itemsizeIndex).toFixed(2);
-                    const id = `extra-style-${index + 1}`;
-                    return (
-                      <div key={index}>
-                        <Form.Check
-                          type="checkbox"
-                          id={id}
-                          label={`${item.styleName} - $${updatedPrice}`}
-                          checked={selectedexrastyle.some(
-                            (s) => s.styleId === item.styleId
-                          )}
-                          onChange={() => {
-                            // create new object with updated price
-                            const updatedItem = { ...item, price: updatedPrice };
-                            toggleExtraStyle(updatedItem);
-                            calculateTotalPrice();
-                          }}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              {/* Extra Fish*/}
-              {menudetails?.extrafish?.length > 0 && (
-                <div className="mt-4">
-                  <h5>Fish</h5>
-                  {menudetails.extrafish.map((item, index) => {
-                    const id = `extra-fish-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra style*/}
+            {menudetails?.extrastyle?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Style</h5>
+                {menudetails.extrastyle.map((item, index) => {
+                  const updatedPrice = (item.price * itemsizeIndex).toFixed(2);
+                  const id = `extra-style-${index + 1}`;
+                  return (
+                    <div key={index}>
+                      <Form.Check
+                        type="checkbox"
+                        id={id}
+                        label={`${item.styleName} - $${updatedPrice}`}
+                        checked={selectedexrastyle.some(
+                          (s) => s.styleId === item.styleId
+                        )}
+                        onChange={() => {
+                          // create new object with updated price
+                          const updatedItem = { ...item, price: updatedPrice };
+                          toggleExtraStyle(updatedItem);
+                          calculateTotalPrice();
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {/* Extra Fish*/}
+            {menudetails?.extrafish?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Fish</h5>
+                {menudetails.extrafish.map((item, index) => {
+                  const id = `extra-fish-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1306,16 +1327,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra side*/}
-              {menudetails?.extraside?.length > 0 && (
-                <div className="mt-4">
-                  <h5>side</h5>
-                  {menudetails.extraside.map((item, index) => {
-                    const id = `extra-side-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra side*/}
+            {menudetails?.extraside?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra side</h5>
+                {menudetails.extraside.map((item, index) => {
+                  const id = `extra-side-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1330,16 +1352,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra ingredient*/}
-              {menudetails?.extraingredient?.length > 0 && (
-                <div className="mt-4">
-                  <h5>ingredient</h5>
-                  {menudetails.extraingredient.map((item, index) => {
-                    const id = `extra-ingredient-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra ingredient*/}
+            {menudetails?.extraingredient?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Ingredient</h5>
+                {menudetails.extraingredient.map((item, index) => {
+                  const id = `extra-ingredient-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1354,16 +1377,17 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-              {/*Extra meatpreparation*/}
-              {menudetails?.extrameatpreparation?.length > 0 && (
-                <div className="mt-4">
-                  <h5>meatpreparation</h5>
-                  {menudetails.extrameatpreparation.map((item, index) => {
-                    const id = `extra-meatpreparation-${index + 1}`;
-                    return (
+                  )
+                })}
+              </div>
+            )}
+            {/*Extra meatpreparation*/}
+            {menudetails?.extrameatpreparation?.length > 0 && (
+              <div className="mt-4">
+                <h5>Extra Meatpreparation</h5>
+                {menudetails.extrameatpreparation.map((item, index) => {
+                  const id = `extra-meatpreparation-${index + 1}`;
+                  return (
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
@@ -1378,35 +1402,75 @@ function AddToCartModal({show, handleClose, product}) {
                         }}
                       />
                     </div>
-                  )})}
-                </div>
-              )}
-                </Col>
-            </Row>
-        </Modal.Body>
-        <Modal.Footer>
-            <div className="root_cart">
-                <p>Quantity</p>
-                <div className="qty-wrapper">
+                  )
+                })}
+              </div>
+            )}
+          </Col>
+        </Row>
+      </Modal.Body>
+      <Modal.Footer>
+        <div className="root_cart">
+          <p>Quantity</p>
+          <div className="qty-wrapper">
 
-                    <Button className="btn_ast" onClick={decrease}>
-                        <p className="assets">-</p>
-                    </Button>
-                   
-                    <div className="add_cart_number">
+            <Button className="btn_ast" onClick={decrease}>
+              <p className="assets">-</p>
+            </Button>
+
+            <div className="add_cart_number">
               <p className="txt_number"> {quantity} </p>
-                    </div>
-                     <Button className="btn_ast" onClick={increase}>
-                        <p className="assets">+</p>
-                    </Button>
-                </div>
             </div>
-            <Button className="theme-btn">
-            <p className="txt_addcart">Add to Cart <i className="bi bi-cart"></i></p>
-          </Button>
-        </Modal.Footer>
+            <Button className="btn_ast" onClick={increase}>
+              <p className="assets">+</p>
+            </Button>
+          </div>
+        </div>
+        <Button className="theme-btn" onClick={handleAddToCart}>
+          <p className="txt_addcart">Add to Cart <i className="bi bi-cart"></i></p>
+        </Button>
+      </Modal.Footer>
     </Modal>
-    </> );
+
+    {/* SECOND: Login Confirmation Modal */}
+    <Modal
+      show={showLoginModal}
+      onHide={() => setShowLoginModal(false)}
+      centered
+    >
+      <Modal.Body className="login-modal-body text-center">
+        <img
+          src="https://i.ibb.co/mFPTyM16/Chat-GPT-Image-Jul-3-2025-01-29-11-PM-Photoroom.jpg"
+          alt="Login Illustration"
+          className="modal-illustration"
+        />
+        <h5 className="modal-title-text">
+          Do you want to login or continue as a guest?
+        </h5>
+        <p className="modal-subtext">
+          If you log in, your order history will be saved. However, if you
+          continue as a guest, you won’t be able to see your order history
+          after completing your order.
+        </p>
+        <div className="modal-button-group">
+          <Button
+            variant="outline-secondary"
+            className="modal-btn guest"
+            onClick={ContinueAsGuest}
+          >
+            Guest
+          </Button>
+          <Button
+            variant="success"
+            className="modal-btn login"
+            onClick={handleFirebaseLogin}
+          >
+            Login
+          </Button>
+        </div>
+      </Modal.Body>
+    </Modal>
+  </>);
 }
 
 export default AddToCartModal;

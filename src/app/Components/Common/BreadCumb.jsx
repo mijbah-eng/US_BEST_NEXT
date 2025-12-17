@@ -24,11 +24,16 @@ const BreadCumb = ({ pageName, pageKey, bgimg, Title }) => {
     setBannerData(res.data?.data);
     setLoading(false);
   };
-  console.log( "bannerData =>" ,bannerData);
-  
+
   return (
     <div className="breadcumb-section">
-      <div className="breadcumb-wrapper" data-background={bannerData && bannerData[0]?.image ? `${basecatagories}slider/${encodeURIComponent(bannerData[0].image)}` : bgimg }>
+      <div className="breadcumb-wrapper"
+        style={{
+          backgroundImage: `url(${bannerData && bannerData[0]?.image
+            ? `${basecatagories}slider/${encodeURIComponent(bannerData[0].image)}`
+            : bgimg
+            })`
+        }} >
         <div className="container">
           <div className="row">
             <div className="col-12">
@@ -46,7 +51,7 @@ const BreadCumb = ({ pageName, pageKey, bgimg, Title }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

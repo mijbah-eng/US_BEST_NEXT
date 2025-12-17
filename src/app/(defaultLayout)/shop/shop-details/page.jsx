@@ -6,12 +6,12 @@ import React from 'react';
 const page = () => {
   return (
     <div>
-             <BreadCumb
-                bgimg="/assets/img/bg/breadcumb.jpg"
-                Title="Shop Details"
-            ></BreadCumb>    
-            <ShopDetails></ShopDetails>      
-            <BestSelling1></BestSelling1>      
+      <BreadCumb
+        bgimg="/assets/img/bg/breadcumb.jpg"
+        Title="Shop Details"
+      ></BreadCumb>
+      <ShopDetails></ShopDetails>
+      <BestSelling1></BestSelling1>
     </div>
   );
 };

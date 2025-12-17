@@ -18,7 +18,10 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, 
         <Image src={imageUrl} alt={item?.menuName} width={158} height={158} />
       </div>
 
-      <Link href="/menu">
+      <Link href={{
+        pathname: "/shop/shop-details",
+        query: { menuId: item.menuId },
+      }}>
         <h3>{item?.menuName}</h3>
       </Link>
       <p>{item?.description}</p>
@@ -42,11 +45,18 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, 
           } else {
             try {
               const priceArray = item.customeType;
-              if (priceArray?.length) {
-                priceDisplay = `$${priceArray[0].cprice} - $${
-                  priceArray[priceArray.length - 1].cprice
-                }`;
+              if (priceArray?.length > 1) {
+                priceDisplay = `$${priceArray[0].cprice} - $${priceArray[priceArray.length - 1].cprice
+                  }`;
+              } else {
+                priceDisplay = `$${priceArray?.[0]?.cprice}`;
               }
+              // priceDisplay = menu.price
+              //   ? `$${menu.price}`
+              //   : priceArray?.length > 1
+              //     ? `$${priceArray[0].cprice} - $${priceArray[priceArray.length - 1].cprice
+              //     }`
+              //     : `$${priceArray?.[0]?.cprice}`;
             } catch (err) {
               priceDisplay = "Price not available";
             }
@@ -58,11 +68,6 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, 
       <div className="social-profile">
         <ul>
           <li>
-            <Link href="/shop/cart">
-              <i className="bi bi-basket2"></i>
-            </Link>
-          </li>
-          <li>
             <span
               className=""
               onClick={(e) => {
@@ -71,7 +76,7 @@ function DishesCard({ item, imageUrl, handleAddToCartClick, setSelectedProduct, 
                 setShowModal(true);
               }}
             >
-              <i className="bi bi-eye"></i>
+              <i className="bi bi-basket2"></i>
             </span>
           </li>
         </ul>

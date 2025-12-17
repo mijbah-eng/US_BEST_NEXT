@@ -131,3 +131,56 @@
   align-items: center;
   gap: 20px;
 }
+
+
+/* Login Modal css  */
+
+
+.login-modal-body {
+  padding: 2rem;
+}
+
+.modal-illustration {
+  width: 220px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.modal-title-text {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 0.75rem;
+}
+
+.modal-subtext {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.modal-button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-btn {
+  width: 120px;
+  font-weight: 500;
+  border-radius: 6px;
+}
+
+.modal-signup a {
+  font-size: 14px;
+  color: #198754;
+  /* Bootstrap green */
+  text-decoration: none;
+}
+
+.modal-header .btn-close {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+}

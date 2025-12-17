@@ -5,14 +5,14 @@ const About4 = () => {
 
     const aboutContent = {  
         img1:'/assets/img/shape/aboutShape1_1.png',  
-        img2:'/assets/img/shape/aboutShape1_3.png',  
+        img2:'/assets/img/shape/Homepage-Logo.png',  
         img3:'/assets/img/shape/aboutShape1_4.png',  
-        img4:'/assets/img/shape/aboutShape1_6.png',  
+        img4:'/assets/img/shape/Homepage-About-us.png',  
         subtitle:"About US",
-        title:'Variety of flavours from american cuisine',
-        content:'It is a long established fact that a reader will be distracted the readable content of a page when looking at layout the point established fact that',  
+        title:'US Best Chicken & Burger Fresh Flavor, Anytime',
+        content:'We serve fresh chicken, burgers, seafood, and breakfast 24 hours a day. Everything is made to order and fast. Enjoy wings in many flavors, seafood platters, grilled items, and breakfast meals. You can eat in or order delivery.',  
         btnName:'ORDER NOW', 
-        btnUrl:'/menu', 
+        btnUrl:'/menu2', 
       } 
 
     return (

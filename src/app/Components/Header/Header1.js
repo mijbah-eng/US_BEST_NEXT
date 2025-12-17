@@ -16,19 +16,12 @@ export default function Header1({ variant }) {
   const [isSticky, setIsSticky] = useState();
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [toggle, setToggle] = useState(false);
-
-
-
-  // Data
   const [show, setShow] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const dispatch = useDispatch();
-console.log(cartItems);
-
   const handeltrack = async () => {
     const result = await dispatch(fetchMenu()).unwrap();
   }
-
   useEffect(() => {
     handeltrack();
     getCartData();
@@ -59,19 +52,17 @@ console.log(cartItems);
   const setCategoryId = (id) => {
     localStorage.setItem("categoryId", id);
   };
-
-  
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
-      if (currentScrollPos > prevScrollPos) {
-        setIsSticky("cs-gescout_sticky"); // Scrolling down
-      } else if (currentScrollPos !== 0) {
-        setIsSticky("cs-gescout_show cs-gescout_sticky"); // Scrolling up
-      } else {
-        setIsSticky();
-      }
+      setIsSticky("cs-gescout_show cs-gescout_sticky");
+      // if (currentScrollPos > prevScrollPos) {
+      //   setIsSticky("cs-gescout_sticky"); // Scrolling down
+      // } else if (currentScrollPos !== 0) {
+      //   setIsSticky("cs-gescout_show cs-gescout_sticky"); // Scrolling up
+      // } else {
+      //   setIsSticky();
+      // }
       setPrevScrollPos(currentScrollPos); // Update previous scroll position
     };
 
@@ -85,15 +76,13 @@ console.log(cartItems);
 
   return (
     <Fragment>
-<div>
-      <header
-        className={`cs_site_header header_style_2 cs_style_1 header_sticky_style1 ${
-          variant ? variant : ""
-        } cs_sticky_header cs_site_header_full_width ${
-          isSticky ? isSticky : ""
-        }`}
-      >
-        {/* <div className="cs_top_header">
+      <div>
+        <header
+          className={`cs_site_header header_style_2 cs_style_1 header_sticky_style1 ${variant ? variant : ""
+            } cs_sticky_header cs_site_header_full_width ${isSticky ? isSticky : ""
+            }`}
+        >
+          {/* <div className="cs_top_header">
         <div className="container">
           <div className="cs_top_header_in">
             <div className="cs_top_header_left header-info">
@@ -119,39 +108,39 @@ console.log(cartItems);
         </div>
       </div>       */}
 
-        <div className="cs_main_header">
-          <div className="container">
-            <div className="cs_main_header_in">
-              <div className="cs_main_header_left">
-                <Link className="cs_site_branding" href="/">
-                  <Image
-                    src="/assets/img/header/open-24.png"
-                    alt="img"
-                    width={80}
-                    height={80}
-                  />
-                </Link>
-                <Link className="cs_site_branding" href="/">
-                  <Image
-                    src="/assets/img/logo/logo.png"
-                    alt="img"
-                    width={80}
-                    height={80}
-                  />
-                </Link>
-              </div>
-              <div className="cs_main_header_center">
-                <div className="cs_nav cs_primary_font fw-medium">
-                  <Nav categories={categories}/>
+          <div className="cs_main_header">
+            <div className="container">
+              <div className="cs_main_header_in">
+                <div className="cs_main_header_left">
+                  <Link className="cs_site_branding" href="/">
+                    <Image
+                      src="/assets/img/header/open_late.png"
+                      alt="img"
+                      width={80}
+                      height={80}
+                    />
+                  </Link>
+                  <Link className="cs_site_branding" href="/">
+                    <Image
+                      src="/assets/img/logo/logo.png"
+                      alt="img"
+                      width={80}
+                      height={80}
+                    />
+                  </Link>
                 </div>
-              </div>
-              <div className="cs_main_header_right">
-                <div className="header-btn d-flex align-items-center">
-                  <a href={'/shop/cart'}
-                    className="cart-trigger cart-icon"
-                  >
-                    <i className="bi bi-cart"></i>
-                    {/* {cartItems?.length > 0 && (
+                <div className="cs_main_header_center">
+                  <div className="cs_nav cs_primary_font fw-medium">
+                    <Nav categories={categories} />
+                  </div>
+                </div>
+                <div className="cs_main_header_right">
+                  <div className="header-btn d-flex align-items-center">
+                    <a href={'/shop/cart'}
+                      className="cart-trigger cart-icon"
+                    >
+                      <i className="bi bi-cart"></i>
+                      {/* {cartItems?.length > 0 && (
                         <span
                           style={{
                             position: "absolute",
@@ -171,43 +160,43 @@ console.log(cartItems);
                           {cartItems?.length !== undefined ? cartItems?.length : "0"}
                         </span>
                       )} */}
-                  </a>
-                  <a
-                    onClick={() => setToggle(!toggle)}
-                    className="menu-trigger menu-icon"
-                  >
-                    <i className="bi bi-list"></i>
-                  </a>
-                  <div className="main-button">
-                    <Link href="/menu2" className="theme-btn">
-                      ORDER NOW <i className="bi bi-arrow-right"></i>
-                    </Link>
+                    </a>
+                    <a
+                      onClick={() => setToggle(!toggle)}
+                      className="menu-trigger menu-icon"
+                    >
+                      <i className="bi bi-list"></i>
+                    </a>
+                    <div className="main-button">
+                      <Link href="/menu2" className="theme-btn">
+                        ORDER NOW <i className="bi bi-arrow-right"></i>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <div className="cs_site_header_spacing_130"></div>
-    </div>
+        <div className="cs_site_header_spacing_130"></div>
+      </div>
 
-    <Sidebar toggle={toggle} setToggle={setToggle} />
+      <Sidebar toggle={toggle} setToggle={setToggle} />
     </Fragment>
-    
+
   );
 }
 
 
-const Sidebar = ({ toggle, setToggle }) => { 
+const Sidebar = ({ toggle, setToggle }) => {
 
-// SideBar
+  // SideBar
   const router = useRouter();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [routepath, setRoutepath] = useState("");
 
-   const OrderHistory = async () => {
+  const OrderHistory = async () => {
     setRoutepath("/orderhistory");
     const auth = getAuth();
     const user = await new Promise((resolve) => {
@@ -286,41 +275,38 @@ const Sidebar = ({ toggle, setToggle }) => {
               <nav className="menu_ber">
                 <ul className="main_menu">
                   <li className="subMenu_parent">
-                    <Link className="singleMenu_link" href="/">
+                    <Link className="singleMenu_link" href="/" onClick={() => setToggle(!toggle)}>
                       <div>Home</div>
                     </Link>
                   </li>
 
                   <li className="subMenu_parent">
-                    <Link className="singleMenu_link" href="/menu">
+                    <Link className="singleMenu_link" href="/menu2" onClick={() => setToggle(!toggle)}>
                       <div>Menu</div>
                       <i className="fa-solid fa-angle-down"></i>
                     </Link>
-
-                    <ul className="subMenu">
-                      <li className="singleMenu">
-                        <Link className="singleMenu_link" href="#">
-                          <div>Menu 1</div>
-                          <i className="fa-solid fa-angle-down"></i>
-                        </Link>
-                      </li>
-                    </ul>
                   </li>
 
                   <li className="subMenu_parent">
-                    <Link className="singleMenu_link" href="/delivery">
+                    <Link className="singleMenu_link" href="/delivery-partner" onClick={() => setToggle(!toggle)}>
                       <div>Delivery</div>
                     </Link>
                   </li>
 
                   <li className="subMenu_parent">
-                    <Link className="singleMenu_link" href="/gallery">
+                    <Link className="singleMenu_link" href="/gallery" onClick={() => setToggle(!toggle)}>
                       <div>Gallery</div>
                     </Link>
                   </li>
 
                   <li className="subMenu_parent">
-                    <Link className="singleMenu_link" href="/contact">
+                    <Link className="singleMenu_link" href="/reservation" onClick={() => setToggle(!toggle)}>
+                      <div>Catering</div>
+                    </Link>
+                  </li>
+
+                  <li className="subMenu_parent">
+                    <Link className="singleMenu_link" href="/contact2" onClick={() => setToggle(!toggle)}>
                       <div>Contact Us</div>
                     </Link>
                   </li>
@@ -338,7 +324,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                     </div>
                     <div className="offcanvas__contact-text">
                       <a target="_blank" rel="noopener noreferrer" href="#">
-                        Main Street, Melbourne, Australia
+                        7109 Martin Luther King Jr Hwy Unit A, North Englewood, <br />MD 20785
                       </a>
                     </div>
                   </li>
@@ -348,7 +334,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                       <i className="bi bi-envelope"></i>
                     </div>
                     <div className="offcanvas__contact-text">
-                      <a href="mailto:info@fresheat.com">info@usbest.com</a>
+                      <a href="mailto:info@fresheat.com">info@usbestchicken.com</a>
                     </div>
                   </li>
 
@@ -358,7 +344,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                     </div>
                     <div className="offcanvas__contact-text">
                       <a target="_blank" rel="noopener noreferrer" href="#">
-                        Monday - Sunday
+                        Open 24 hours | Monday - Sunday
                       </a>
                     </div>
                   </li>
@@ -386,7 +372,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                 </div>
 
                 <div className="header-button mt-4">
-                  <Link href="/menu" className="theme-btn">
+                  <Link href="/menu2" className="theme-btn">
                     <span className="button-content-wrapper d-flex align-items-center justify-content-center">
                       <span className="button-icon">
                         <i className="fa-sharp fa-regular fa-cart-shopping bg-transparent text-white me-2"></i>
@@ -396,7 +382,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                   </Link>
                 </div>
 
-                
+
 
                 <div className="header-button mt-4" style={{ cursor: "pointer" }}>
                   <div onClick={OrderHistory} className="theme-btn">
@@ -410,17 +396,14 @@ const Sidebar = ({ toggle, setToggle }) => {
                 </div>
 
                 <div className="social-icon d-flex align-items-center">
-                  <a href="#">
+                  <a href="https://www.facebook.com/profile.php?id=61582703983853" target="_blank">
                     <i className="bi bi-facebook"></i>
                   </a>
-                  <a href="#">
+                  <a href="https://x.com/usbestchicken" target="_blank">
                     <i className="bi bi-twitter"></i>
                   </a>
-                  <a href="#">
+                  <a href="https://www.youtube.com/@USBestChickenBurger" target="_blank">
                     <i className="bi bi-youtube"></i>
-                  </a>
-                  <a href="#">
-                    <i className="bi bi-linkedin"></i>
                   </a>
                 </div>
               </div>
@@ -430,13 +413,12 @@ const Sidebar = ({ toggle, setToggle }) => {
       </div>
 
       <div
-        className={`offcanvas__overlay ${
-          toggle ? "overlay-open" : ""
-        }`}
+        className={`offcanvas__overlay ${toggle ? "overlay-open" : ""
+          }`}
         onClick={() => setToggle(!toggle)}
       ></div>
 
- {/* Modal */}
+      {/* Modal */}
       <Modal
         show={showLoginModal}
         onHide={() => setShowLoginModal(false)}

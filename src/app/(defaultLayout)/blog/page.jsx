@@ -5,11 +5,12 @@ import React from 'react';
 const page = () => {
   return (
     <div>
-             <BreadCumb
-                bgimg="/assets/img/bg/breadcumb.jpg"
-                Title="Blog"
-            ></BreadCumb>   
-            <Blog3></Blog3>      
+      <BreadCumb
+        bgimg="/assets/img/bg/breadcumb.jpg"
+        Title="Blog"
+        pageKey="Blog"
+      ></BreadCumb>
+      <Blog3></Blog3>
     </div>
   );
 };

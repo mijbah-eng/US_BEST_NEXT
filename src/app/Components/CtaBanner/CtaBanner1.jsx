@@ -16,15 +16,15 @@ const CtaBanner1 = () => {
                     <div className="row">
                         <div className="col-xl-6 order-2 order-xl-1">
                             <div className="cta-content">
-                                <h6 className="wow fadeInUp" data-wow-delay="0.5s">WELCOME FRESHEAT</h6>
-                                <h3 className="wow fadeInUp" data-wow-delay="0.7s">TODAY SPACIAL FOOD</h3>
-                                <p className="wow fadeInUp" data-wow-delay="0.8s">limits Time Offer</p>
-                                <Link className="theme-btn wow fadeInUp" data-wow-delay="0.9s" href="/menu">ORDER NOW <i className="bi bi-arrow-right"></i></Link>
+                                <h6 className="wow fadeInUp" data-wow-delay="0.5s">US BEST CHICKEN</h6>
+                                <h3 className="wow fadeInUp" data-wow-delay="0.7s" style={{marginBottom:"16px"}}>CRISPY PREFECTION ON EVERY BITE</h3>
+                                {/* <p className="wow fadeInUp" data-wow-delay="0.8s">limits Time Offer</p> */}
+                                <Link className="theme-btn wow fadeInUp" data-wow-delay="0.9s" href="/menu2">ORDER NOW <i className="bi bi-arrow-right"></i></Link>
                             </div>
                         </div>
                         <div className="col-xl-6 order-1 order-xl-2">
                             <div className="cta-thumb">
-                            <Image className="img-fluid float-bob-x" src="/assets/img/cta/ctaThumb1_1.png" alt="img" width={656} height={326}   />
+                            <Image className="img-fluid float-bob-x" src="/assets/img/cta/cat_wing.png" alt="img" width={656} height={326}   />
                             </div>
                         </div>
                     </div>
