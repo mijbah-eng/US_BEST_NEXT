@@ -2750,58 +2750,17 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-input[type="checkbox"] {
-  visibility: hidden;
-  opacity: 0;
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-}
-
 input[type="checkbox"]:checked~label:after {
   opacity: 1;
 }
 
 input[type="checkbox"]~label {
-  position: relative;
-  padding-left: 30px;
   cursor: pointer;
   display: block;
   line-height: 30px;
 }
 
-input[type="checkbox"]~label:before {
-  content: "";
-  position: absolute;
-  left: 0px;
-  top: 3.5px;
-  background: var(--white);
-  border: 1px solid var(--border-2);
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  z-index: 9;
-}
 
-input[type="checkbox"]~label:after {
-  content: "";
-  position: absolute;
-  left: 6px;
-  top: 9px;
-  background: var(--theme);
-  height: 8px;
-  width: 8px;
-  opacity: 0;
-  -webkit-transition: 0.4s;
-  -o-transition: 0.4s;
-  -moz-transition: 0.4s;
-  transition: 0.4s;
-  z-index: 9;
-}
 
 input[type="checkbox"].style2~label {
   color: #8b929c;
@@ -2834,48 +2793,6 @@ input[type="checkbox"].style2:checked~label:before {
   height: 0;
   display: none;
 } */
-
-input[type="radio"]~label {
-  /* position: relative; */
-  /* padding-left: 30px; */
-  cursor: pointer;
-  line-height: 1;
-  display: inline-block;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-input[type="radio"]~label::before {
-  content: "\f287";
-  font-family: bootstrap-icons !important;
-  position: absolute;
-  font-family: var(--icon-font);
-  left: 0;
-  top: -2px;
-  width: 20px;
-  height: 20px;
-  padding-left: 0;
-  font-size: 0.6em;
-  line-height: 19px;
-  text-align: center;
-  border: 1px solid var(--theme);
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
-  border-radius: 100%;
-  font-weight: 700;
-  background: var(--white);
-  color: transparent;
-  -webkit-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-
-input[type="radio"]:checked~label::before {
-  border-color: var(--theme);
-  background-color: var(--theme);
-  color: var(--white);
-}
 
 .search-wrap {
   width: 100%;
