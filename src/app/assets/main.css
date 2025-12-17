@@ -2836,8 +2836,8 @@ input[type="checkbox"].style2:checked~label:before {
 } */
 
 input[type="radio"]~label {
-  position: relative;
-  padding-left: 30px;
+  /* position: relative; */
+  /* padding-left: 30px; */
   cursor: pointer;
   line-height: 1;
   display: inline-block;

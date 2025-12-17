@@ -801,7 +801,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       key={index}
                       type="radio"
                       name="size"
-                      id={id}
+                      
                       label={`${m.customtype} - $${m.cprice}`}
                       defaultChecked={index === 0}
                       onChange={() => {
@@ -840,7 +840,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.toppingName}
                         checked={isChecked(item.toppingName, selectedToppings)}
                         onChange={() =>
@@ -907,7 +907,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.chrustName}
                         checked={selectedchrust.some(
                           (s) => s.chrustId === item.chrustId
@@ -929,7 +929,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.sauce}
                         checked={selectedSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -951,7 +951,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.sodaName}
                         checked={selectedsoda.some(
                           (s) => s.sodaId === item.sodaId
@@ -974,7 +974,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.styleName}
                         checked={selectedstyle.some(
                           (s) => s.styleId === item.styleId
@@ -996,7 +996,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.fishName}
                         checked={selectedfish.some(
                           (s) => s.fishId === item.fishId
@@ -1018,7 +1018,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.sideName}
                         checked={selectedside.some(
                           (s) => s.sideId === item.sideId
@@ -1040,7 +1040,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.ingredientName}
                         checked={selectedingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1062,7 +1062,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.meatpreparationName}
                         checked={selectedmeatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId
@@ -1084,7 +1084,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.extraName} - $${item.price}`}
                         checked={selectedextra.some(
                           (s) => s.extraId === item.extraId
@@ -1109,7 +1109,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.combotagName} - $${item.price}`}
                         checked={selectedcombotag.some(
                           (s) => s.combotagId === item.combotagId
@@ -1143,7 +1143,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={item.toppingName}
                         checked={isChecked(
                           item.toppingName,
@@ -1214,7 +1214,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       <Form.Check
                         type="checkbox"
                         label={`${item.chrustName} - $${item.price}`}
-                        id={id}
+                        
                         checked={selectedextraChrust.some(
                           (s) => s.chrustId === item.chrustId
                         )}
@@ -1238,7 +1238,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.sauce} - $${item.price}`}
                         checked={selectedExtraSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -1264,7 +1264,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       <Form.Check
                         type="checkbox"
                         label={`${item.sodaName} - $${item.price}`}
-                        id={id}
+                        
                         checked={selectedExtrasoda.some(
                           (s) => s.sodaId === item.sodaId
                         )}
@@ -1289,7 +1289,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.styleName} - $${updatedPrice}`}
                         checked={selectedexrastyle.some(
                           (s) => s.styleId === item.styleId
@@ -1316,7 +1316,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.fishName} - $${item.price}`}
                         checked={selectedextrafish.some(
                           (s) => s.fishId === item.fishId
@@ -1341,7 +1341,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.sideName} - $${item.price}`}
                         checked={selectedextraside.some(
                           (s) => s.sideId === item.sideId
@@ -1366,7 +1366,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.ingredientName} - $${item.price}`}
                         checked={selectedextraingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1391,7 +1391,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        id={id}
+                        
                         label={`${item.meatpreparationName} - $${item.price}`}
                         checked={selectedextrameatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId
