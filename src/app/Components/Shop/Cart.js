@@ -27,7 +27,7 @@ const Cart = () => {
             const quantity = parseInt(item.quantity) || 0;
             return total + price * quantity;
         }, 0);
-        let taxAmount = (8.88 / 100) * subtotal;
+        let taxAmount = (6 / 100) * subtotal;
         // let total = subtotal + taxAmount;
         return taxAmount;
     };
@@ -309,7 +309,7 @@ const Cart = () => {
                                                         }}>
                                                         <i className="bi bi-dash-lg"></i>
                                                     </button>
-                                                    <input type="number" className="qty-input" value={item?.quantity} min="1" max="99" readOnly/>
+                                                    <input type="number" className="qty-input" value={item?.quantity} min="1" max="99" readOnly />
                                                     <button className="quantity-plus qty-btn"
                                                         onClick={(e) => {
                                                             e.preventDefault();
@@ -346,9 +346,9 @@ const Cart = () => {
                         </tbody>
                     </table>
                 </form>
-                <div className="wc-proceed-to-checkout mt-3">
-                            <Link href="/menu2" className="theme-btn btn-fw">Add More Item</Link>
-                        </div>
+                <div className="wc-proceed-to-checkout">
+                    <Link href="/menu2" className="theme-btn btn-addmore" style={{ marginTop: "0px" }}>Add More Item</Link>
+                </div>
                 <div className="row justify-content-end">
                     <div className="col-md-8 col-lg-7 col-xl-6">
                         <h2 className="h4 summary-title">Cart Totals</h2>
@@ -370,9 +370,9 @@ const Cart = () => {
                             </tbody>
                             <tfoot>
                                 <tr className="order-total">
-                                    <td style={{fontSize:"18px"}}>Order Total</td>
+                                    <td style={{ fontSize: "18px" }}>Order Total</td>
                                     <td data-title="Total">
-                                        <strong><span className="amount" style={{fontSize:"18px"}}><bdi><span>$</span>
+                                        <strong><span className="amount" style={{ fontSize: "18px" }}><bdi><span>$</span>
                                             {(calculateCartTotal() + calculateTaxTotal()).toFixed(2)}
                                         </bdi></span></strong>
                                     </td>

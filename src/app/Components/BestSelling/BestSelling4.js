@@ -55,7 +55,7 @@ const BestSelling4 = () => {
     dispatch(mainmenu());
   }, [dispatch]);
 
-  const { itemCategorymenu, loading } = useSelector(
+  const { itemCategorymenu, loading, dateTime } = useSelector(
     (state) => state.itemCategorymenu
   );
 
@@ -79,6 +79,8 @@ const BestSelling4 = () => {
         {
           categoryName: menudata.categoryName,
           menu: menudata.menu || [],
+          start_time: menudata.start_time,
+          end_time: menudata.end_time
         },
       ]);
     }
@@ -98,6 +100,8 @@ const BestSelling4 = () => {
     const allCategories = itemCategorymenu.map((cat) => ({
       categoryName: cat.categoryName,
       menu: cat.menu || [],
+      start_time: cat.start_time,
+      end_time: cat.end_time
     }));
     setItem(allCategories);
   };
@@ -185,13 +189,20 @@ const BestSelling4 = () => {
                           const imageUrl = `${basecatagories}menu/${encodeURIComponent(
                             item.image
                           )}`;
-
+                          const categoryValidation = {
+                            start_time : cat?.start_time,
+                            end_time : cat?.end_time,
+                            name: cat.categoryName
+                          }
+                          
                           return (
                             <DishesCard
                               show={showModal}
                               handleClose={handleCloseModal}
                               product={selectedProduct}
                               item={item}
+                              catValidation={categoryValidation}
+                              currentDate={dateTime}
                               imageUrl={imageUrl}
                               key={index}
                               handleAddToCartClick={handleAddToCartClick}

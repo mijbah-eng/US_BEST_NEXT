@@ -68,7 +68,8 @@ function AddToCartModal({ show, handleClose, product }) {
         handleSizeSelection({
           customtype: response.data?.menu.customeType[0]?.customtype,
           cprice: response.data?.menu.customeType[0]?.cprice,
-          saucecount:response.data?.menu.customeType[0]?.saucecount
+          saucecount: response.data?.menu.customeType[0]?.saucecount,
+          sidecount: response.data?.menu.customeType[0]?.sidecount
         });
       }
     } catch (error) {
@@ -224,7 +225,7 @@ function AddToCartModal({ show, handleClose, product }) {
       );
     } else {
       setSelectedstyle((prev) => [
-        ...prev,
+        // ...prev,
         {
           price: style.price || "0",
           styleId: style.styleId,
@@ -353,10 +354,27 @@ function AddToCartModal({ show, handleClose, product }) {
 
   // side handle
   const toggleSide = (side) => {
+    const sideLimit = Number(selectedSize?.sidecount);
+    console.log(selectedSize, '>>>>>>>>>>', sideLimit);
+
     const exists = selectedside.find((s) => s.sideId === side.sideId);
     if (exists) {
       setSelectedside((prev) => prev.filter((s) => s.sideId !== side.sideId));
     } else {
+      if (!isNaN(sideLimit) && sideLimit > 0 && selectedside.length >= sideLimit) {
+        Swal.fire({
+          icon: "error",
+          title: "Failed",
+          text: `You can select a maximum of ${sideLimit} Side.`,
+          didOpen: () => {
+            const swalContainer = document.querySelector('.swal2-container');
+            if (swalContainer) {
+              swalContainer.style.zIndex = '9999999';
+            }
+          }
+        });
+        return;
+      }
       setSelectedside((prev) => [
         ...prev,
         {
@@ -801,7 +819,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       key={index}
                       type="radio"
                       name="size"
-                      
+
                       label={`${m.customtype} - $${m.cprice}`}
                       defaultChecked={index === 0}
                       onChange={() => {
@@ -840,7 +858,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.toppingName}
                         checked={isChecked(item.toppingName, selectedToppings)}
                         onChange={() =>
@@ -907,7 +925,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.chrustName}
                         checked={selectedchrust.some(
                           (s) => s.chrustId === item.chrustId
@@ -929,7 +947,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.sauce}
                         checked={selectedSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -951,7 +969,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.sodaName}
                         checked={selectedsoda.some(
                           (s) => s.sodaId === item.sodaId
@@ -973,8 +991,8 @@ function AddToCartModal({ show, handleClose, product }) {
                   return (
                     <div key={index}>
                       <Form.Check
-                        type="checkbox"
-                        
+                        type="radio"
+
                         label={item.styleName}
                         checked={selectedstyle.some(
                           (s) => s.styleId === item.styleId
@@ -996,7 +1014,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.fishName}
                         checked={selectedfish.some(
                           (s) => s.fishId === item.fishId
@@ -1018,7 +1036,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.sideName}
                         checked={selectedside.some(
                           (s) => s.sideId === item.sideId
@@ -1040,7 +1058,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.ingredientName}
                         checked={selectedingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1062,7 +1080,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.meatpreparationName}
                         checked={selectedmeatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId
@@ -1084,7 +1102,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.extraName} - $${item.price}`}
                         checked={selectedextra.some(
                           (s) => s.extraId === item.extraId
@@ -1109,7 +1127,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.combotagName} - $${item.price}`}
                         checked={selectedcombotag.some(
                           (s) => s.combotagId === item.combotagId
@@ -1143,7 +1161,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={item.toppingName}
                         checked={isChecked(
                           item.toppingName,
@@ -1214,7 +1232,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       <Form.Check
                         type="checkbox"
                         label={`${item.chrustName} - $${item.price}`}
-                        
+
                         checked={selectedextraChrust.some(
                           (s) => s.chrustId === item.chrustId
                         )}
@@ -1238,7 +1256,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.sauce} - $${item.price}`}
                         checked={selectedExtraSauces.some(
                           (s) => s.sauceId === item.sauceId
@@ -1264,7 +1282,7 @@ function AddToCartModal({ show, handleClose, product }) {
                       <Form.Check
                         type="checkbox"
                         label={`${item.sodaName} - $${item.price}`}
-                        
+
                         checked={selectedExtrasoda.some(
                           (s) => s.sodaId === item.sodaId
                         )}
@@ -1289,7 +1307,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.styleName} - $${updatedPrice}`}
                         checked={selectedexrastyle.some(
                           (s) => s.styleId === item.styleId
@@ -1316,7 +1334,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.fishName} - $${item.price}`}
                         checked={selectedextrafish.some(
                           (s) => s.fishId === item.fishId
@@ -1341,7 +1359,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.sideName} - $${item.price}`}
                         checked={selectedextraside.some(
                           (s) => s.sideId === item.sideId
@@ -1366,7 +1384,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.ingredientName} - $${item.price}`}
                         checked={selectedextraingredient.some(
                           (s) => s.ingredientId === item.ingredientId
@@ -1391,7 +1409,7 @@ function AddToCartModal({ show, handleClose, product }) {
                     <div key={index}>
                       <Form.Check
                         type="checkbox"
-                        
+
                         label={`${item.meatpreparationName} - $${item.price}`}
                         checked={selectedextrameatpreparation.some(
                           (s) => s.meatpreparationId === item.meatpreparationId

@@ -83,7 +83,7 @@ const Checkout = () => {
 
     const calculateTaxTotal = () => {
         const subtotal = calculateCartTotal();
-        return (8.88 / 100) * subtotal;
+        return (6 / 100) * subtotal;
     };
 
     // ✅ Fetch user details if logged in
@@ -161,10 +161,10 @@ const Checkout = () => {
             return;
         }
 
-        if (!a) {
-            Swal.fire("Required", "Address is required", "warning");
-            return;
-        }
+        // if (!a) {
+        //     Swal.fire("Required", "Address is required", "warning");
+        //     return;
+        // }
 
         // ✔ All validations passed
         Swal.fire({
@@ -301,16 +301,16 @@ const Checkout = () => {
 
                                 <div className="row">
                                     <div className="col-md-6 form-group">
-                                        <input type="text" className="form-control" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder="First Name*" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                                     </div>
                                     <div className="col-md-6 form-group">
-                                        <input type="text" className="form-control" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder="Last Name*" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                                     </div>
                                     <div className="col-md-6 form-group">
-                                        <input type="text" className="form-control" placeholder="Email Address" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder="Email Address*" value={email} onChange={(e) => setEmail(e.target.value)} />
                                     </div>
                                     <div className="col-md-6 form-group">
-                                        <input type="text" className="form-control" placeholder="Phone number" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                                        <input type="text" className="form-control" placeholder="Phone number*" value={phone} onChange={(e) => setPhone(e.target.value)} />
                                     </div>
                                     <div className="col-12 form-group">
                                         <textarea className="form-control" placeholder="Street Address" value={address} onChange={(e) => setAddress(e.target.value)} />

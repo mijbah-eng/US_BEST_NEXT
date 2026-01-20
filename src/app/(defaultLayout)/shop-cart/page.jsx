@@ -46,7 +46,7 @@ const page = () => {
             setLoading(true);
             setStatusMessage("Verifying payment...");
             const sessionRes = await axios.post(`${base_url}/api/checkSessionStatus`,
-                { sessionId },
+                { sessionId,resturantId },
                 {
                     headers: {
                         Accept: "*/*",

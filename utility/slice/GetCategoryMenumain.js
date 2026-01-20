@@ -23,6 +23,7 @@ const GetCategoryMenumainSlice = createSlice({
     itemCategorymenu: [],
     loading: false,
     error: null,
+    dateTime:null
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -34,6 +35,7 @@ const GetCategoryMenumainSlice = createSlice({
       .addCase(mainmenu.fulfilled, (state, action) => {
         state.loading = false;
         state.itemCategorymenu = action.payload?.data || [];
+        state.dateTime = action.payload?.dateTime
       })
       .addCase(mainmenu.rejected, (state, action) => {
         state.loading = false;

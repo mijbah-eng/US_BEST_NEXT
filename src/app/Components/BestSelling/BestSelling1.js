@@ -47,7 +47,7 @@ const BestSelling1 = () => {
     dispatch(mainmenu());
   }, [dispatch]);
 
-  const { itemCategorymenu, loading } = useSelector((state) => state.itemCategorymenu);
+  const { itemCategorymenu, loading, dateTime } = useSelector((state) => state.itemCategorymenu);
 
   useEffect(() => {
     if (categoryId && itemCategorymenu.length > 0) {
@@ -69,6 +69,8 @@ const BestSelling1 = () => {
         {
           categoryName: menudata.categoryName,
           menu: menudata.menu || [],
+          start_time: menudata.start_time,
+          end_time: menudata.end_time
         },
       ]);
     }
@@ -79,6 +81,8 @@ const BestSelling1 = () => {
     const allCategories = itemCategorymenu.map((cat) => ({
       categoryName: cat.categoryName,
       menu: cat.menu || [],
+      start_time: cat.start_time,
+      end_time: cat.end_time
     }));
     setItem(allCategories);
   };
@@ -154,35 +158,41 @@ const BestSelling1 = () => {
               {/* FAST FOOD */}
               {item?.length > 0
                 ? item.map((cat, catIndex) => (
-                    <div className={`tab-pane ${catIndex === 0 ?  'active': ''}`} key={cat.categoryName}>
-                      <div className="food-title">
-                        <h2>{cat.categoryName}</h2>
-                      </div>
-
-                      <div className="dishes-card-wrap style1">
-                        {cat?.menu?.length > 0
-                          ? cat.menu.map((item, index) => {
-                              const imageUrl = `${basecatagories}menu/${encodeURIComponent(
-                                item.image
-                              )}`;
-
-                              return (
-                                <DishesCard
-                                  show={showModal}
-                                  handleClose={handleCloseModal}
-                                  product={selectedProduct}
-                                  item={item}
-                                  imageUrl={imageUrl}
-                                  key={index}
-                                  handleAddToCartClick={handleAddToCartClick}
-                                  setSelectedProduct={setSelectedProduct}
-                                />
-                              );
-                            })
-                          : "Data Not Found"}
-                      </div>
+                  <div className={`tab-pane ${catIndex === 0 ? 'active' : ''}`} key={cat.categoryName}>
+                    <div className="food-title">
+                      <h2>{cat.categoryName}</h2>
                     </div>
-                  ))
+
+                    <div className="dishes-card-wrap style1">
+                      {cat?.menu?.length > 0
+                        ? cat.menu.map((item, index) => {
+                          const imageUrl = `${basecatagories}menu/${encodeURIComponent(
+                            item.image
+                          )}`;
+                          const categoryValidation = {
+                            start_time: cat?.start_time,
+                            end_time: cat?.end_time
+                          }
+
+                          return (
+                            <DishesCard
+                              show={showModal}
+                              handleClose={handleCloseModal}
+                              product={selectedProduct}
+                              item={item}
+                              catValidation={categoryValidation}
+                              currentDate={dateTime}
+                              imageUrl={imageUrl}
+                              key={index}
+                              handleAddToCartClick={handleAddToCartClick}
+                              setSelectedProduct={setSelectedProduct}
+                            />
+                          );
+                        })
+                        : "Data Not Found"}
+                    </div>
+                  </div>
+                ))
                 : "Category Not Found"}
             </div>
           </div>

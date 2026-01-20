@@ -6787,7 +6787,7 @@ input.main-search-input::placeholder {
   font-weight: 700;
   line-height: normal;
   text-transform: uppercase;
-  opacity: 0.06;
+  /* opacity: 0.06; */
 }
 
 @media (max-width: 767px) {
@@ -6811,7 +6811,7 @@ input.main-search-input::placeholder {
 }
 
 .marquee-inner.to-left {
-  animation: marqueeLeft 25s linear infinite;
+  animation: marqueeLeft 12s linear infinite;
 }
 
 @keyframes marqueeLeft {
@@ -13748,7 +13748,13 @@ input.main-search-input::placeholder {
   .theme-btn.btn-fw {
     position: relative;
     align-items: flex-end;
-    left: 57%;
+    left: 67% !important;
+  }
+
+  .btn-addmore {
+    position: relative;
+    align-items: flex-end;
+    left: 57% !important;
   }
 }
 
@@ -16174,6 +16180,7 @@ button:not(:disabled),
     display: none;
   }
 }
+
 .food-title {
   padding: 20px 0px 0px 0px;
 }

@@ -5,10 +5,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import basecatagories, { base_url, resturantId } from "../../../../utility/config";
 import AddToCartModal from "../DishesCard/AddToCartModal";
+import Swal from "sweetalert2";
 
 const ShopDetails = () => {
     const [menuId, setMenuId] = useState("");
     const [menu, setMenu] = useState("");
+    const [currentDate, setCurrentDate] = useState("");
     const [relatedMenu, setRelatedMenu] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -35,6 +37,7 @@ const ShopDetails = () => {
                 menuId: menuId,
             });
             setMenu(response.data?.menu || {});
+            setCurrentDate(response.data?.dateTime || null);
             const res = await axios.post(`${base_url}/api/GetMenubyCategory`, {
                 resturantId: resturantId,
                 categoryId: response.data?.menu.categoryId,
@@ -47,6 +50,103 @@ const ShopDetails = () => {
             console.error("Error fetching menu details:", error);
         }
     };
+
+    const isTimeWithinRange = (startTime, endTime, currentDateTime) => {
+        // ✅ If time restriction not set → allow
+        if (!startTime || !endTime) {
+            return true;
+        }
+        // extract HH:mm from times
+        const toMinutes = (time) => {
+            const [h, m] = time.split(":").map(Number);
+            return h * 60 + m;
+        };
+
+        const currentTime = currentDateTime.split(" ")[1].slice(0, 5); // HH:mm
+
+        const startMinutes = toMinutes(startTime);
+        const endMinutes = toMinutes(endTime);
+        const currentMinutes = toMinutes(currentTime);
+
+        return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
+    };
+
+    const handleaddcartvalidation = () => {
+
+        /* ---------- Category Time VALIDATION ---------- */
+        const iscatValid = isTimeWithinRange(
+            menu.CatStart,
+            menu.CatEnd,
+            currentDate
+        );
+
+        if (!iscatValid) {
+            Swal.fire({
+                icon: "warning",
+                title: `This Menu is available between ${menu.CatStart} and ${menu.CatEnd}`,
+            });
+            return;
+        }
+
+        /* ---------- DAY VALIDATION ---------- */
+
+        // ✅ No day restriction → allow
+        // Safe JSON parse
+        const DAY_MAP = {
+            sun: "Sunday",
+            mon: "Monday",
+            tue: "Tuesday",
+            wed: "Wednesday",
+            thu: "Thursday",
+            fri: "Friday",
+            sat: "Saturday",
+        };
+        let availableDays = [];
+        try {
+            availableDays = JSON.parse(menu?.available_days ?? "[]");
+        } catch (e) {
+            availableDays = [];
+        }
+        if (Array.isArray(availableDays) && availableDays.length > 0) {
+            const date = new Date(
+                currentDate.replace(" ", "T") + "-05:00" // America/New_York
+            );
+
+            const today = date
+                .toLocaleDateString("en-US", {
+                    weekday: "short",
+                    timeZone: "America/New_York",
+                })
+                .toLowerCase();
+
+            if (!availableDays.includes(today)) {
+                const readableDays = availableDays
+                    .map(day => DAY_MAP[day] || day)
+                    .join(", ");
+                Swal.fire({
+                    icon: "warning",
+                    title: `This item is available only on ${readableDays}`,
+                });
+                return false;
+            }
+        }
+        /* ---------- Menu Time VALIDATION ---------- */
+        const ismenuValid = isTimeWithinRange(
+            menu.start_time,
+            menu.end_time,
+            currentDate
+        );
+        if (!ismenuValid) {
+            Swal.fire({
+                icon: "warning",
+                title: `This Menu is available between ${menu.start_time} and ${menu.end_time}`,
+            });
+            return;
+        }
+
+        handleAddToCartClick(menu);
+        setShowModal(true);
+    }
 
     const handleAddToCartClick = (product) => {
         const imageUrl = `${basecatagories}menu/${encodeURIComponent(
@@ -115,8 +215,7 @@ const ShopDetails = () => {
                                             <span className="theme-btn cart-btn0"
                                                 onClick={(e) => {
                                                     e.preventDefault();
-                                                    handleAddToCartClick(menu);
-                                                    setShowModal(true);
+                                                    handleaddcartvalidation();
                                                 }}>Add to Cart <i className="bi bi-basket3-fill bg-transparent text-white"></i></span>
                                         </div>
                                         <div className="share">

@@ -11,7 +11,7 @@ const Offer1 = () => {
     }, []);
 
     const offerItems = [
-        { img: '/assets/img/offer/breakfast.png', title1: 'ON THIS WEEK', title2: 'BREAKFAST', content: 'limits Time Offer', addClass: 'theme-btn style5', id: 60 },
+        { img: '/assets/img/offer/SOULFOOD.png', title1: 'YOUR EVERYDAY', title2: 'SOUL FOOD', content: 'limits Time Offer', addClass: 'theme-btn style5', id: 62 },
         { img: '/assets/img/offer/sandwitch.png', title1: 'WELCOME FRESHEAT', title2: 'Sandwich', content: 'limits Time Offer', addClass: 'theme-btn style5', id: 56 },
         { img: '/assets/img/offer/US_Wings.png', title1: 'ON THIS WEEK', title2: 'Party Wings', content: 'limits Time Offer', addClass: 'theme-btn style5', id: 63 },
     ];

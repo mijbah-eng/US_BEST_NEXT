@@ -122,7 +122,7 @@ const page = () => {
         {
             img: `${basecatagories}slider/${encodeURIComponent(bannerData[0]?.image2)}`,
             subtitle: "Hot meals. Fresh ingredients. Fresh Breakfast to Serve.",
-            title: "START YOUR DAY WITH OUS BREAKFAST",
+            title: "SOUL FOOD HOME STYLE FRESH DAY",
             btnname: "ORDER NOW",
             url: "/menu2?categoryId=60"
         },
@@ -209,7 +209,7 @@ const page = () => {
         dispatch(mainmenu());
     }, [dispatch]);
 
-    const { itemCategorymenu, loading } = useSelector((state) => state.itemCategorymenu);
+    const { itemCategorymenu, loading, dateTime } = useSelector((state) => state.itemCategorymenu);
 
     useEffect(() => {
         if (categoryId && itemCategorymenu.length > 0) {
@@ -230,6 +230,8 @@ const page = () => {
                 {
                     categoryName: menudata.categoryName,
                     menu: menudata.menu || [],
+                    start_time: menudata.start_time,
+                    end_time: menudata.end_time
                 },
             ]);
         }
@@ -250,6 +252,8 @@ const page = () => {
         const allCategories = itemCategorymenu.map((cat) => ({
             categoryName: cat.categoryName,
             menu: cat.menu || [],
+            start_time: cat.start_time,
+            end_time: cat.end_time
         }));
         setItem(allCategories);
     };
@@ -383,6 +387,22 @@ const page = () => {
                         <div className="pagination-className swiper-pagination"></div>
                     </div>
                 </div>
+                <div className="marquee-wrapper style-2 text-slider" style={{ marginBottom: "0px", backgroundColor: "#f4f1ea", marginTop: "30px" }}>
+                    <div className="marquee-inner to-left">
+                        <ul className="marqee-list d-flex">
+                            <li className="marquee-item style-2">
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>BREAKFAST</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>lUNCH</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>DINNER</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>SOUL FOOD</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>BREAKFAST</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>lUNCH</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>DINNER</span>
+                                <span className="text-slider"></span><span className="text-slider text-style" style={{ color: "red" }}>SOUL FOOD</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
             {/* <FoodItems1></FoodItems1> */}
             <section className="best-food-items-section fix section-padding bg-color2" style={{ padding: "50px 0px" }}>
@@ -508,6 +528,11 @@ const page = () => {
                                                         const imageUrl = `${basecatagories}menu/${encodeURIComponent(
                                                             item.image
                                                         )}`;
+                                                        const categoryValidation = {
+                                                            start_time: cat?.start_time,
+                                                            end_time: cat?.end_time,
+                                                            name: cat.categoryName
+                                                        }
 
                                                         return (
                                                             <DishesCard
@@ -515,6 +540,8 @@ const page = () => {
                                                                 handleClose={handleCloseModal}
                                                                 product={selectedProduct}
                                                                 item={item}
+                                                                catValidation={categoryValidation}
+                                                                currentDate={dateTime}
                                                                 imageUrl={imageUrl}
                                                                 key={index}
                                                                 handleAddToCartClick={handleAddToCartClick}
@@ -603,7 +630,14 @@ const page = () => {
                     <div className="marquee-inner to-left">
                         <ul className="marqee-list d-flex">
                             <li className="marquee-item style-2">
-                                <span className="text-slider"></span><span className="text-slider text-style">chicken pizza</span>
+                                {item?.length > 0
+                                    ? item.map((cat, catIndex) => (
+                                        <>
+                                            <span className="text-slider"></span><span className="text-slider text-style">{cat.categoryName}</span>
+                                        </>
+                                    ))
+                                    : <></>}
+                                {/* <span className="text-slider"></span><span className="text-slider text-style">chicken pizza</span>
                                 <span className="text-slider"></span><span className="text-slider text-style">GRILLED CHICKEN</span>
                                 <span className="text-slider"></span><span className="text-slider text-style">BURGER</span>
                                 <span className="text-slider"></span><span className="text-slider text-style">CHICKEN PIZZA</span>
@@ -616,7 +650,7 @@ const page = () => {
                                 <span className="text-slider"></span><span className="text-slider text-style">CHICKEN PIZZA</span>
                                 <span className="text-slider"></span><span className="text-slider text-style">FRESH PASTA</span>
                                 <span className="text-slider"></span><span className="text-slider text-style">ITALIANO FRENCH FRY</span>
-                                <span className="text-slider"></span><span className="text-slider text-style">CHICKEN FRY</span>
+                                <span className="text-slider"></span><span className="text-slider text-style">CHICKEN FRY</span> */}
                             </li>
                         </ul>
                     </div>

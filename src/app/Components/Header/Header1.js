@@ -11,6 +11,8 @@ import { base_url, resturantId } from "../../../../utility/config";
 import { useRouter } from "next/navigation";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../../utility/firebase/firebase";
 import { Button, Modal } from "react-bootstrap";
 export default function Header1({ variant }) {
   const [isSticky, setIsSticky] = useState();
@@ -122,7 +124,7 @@ export default function Header1({ variant }) {
                   </Link>
                   <Link className="cs_site_branding" href="/">
                     <Image
-                      src="/assets/img/logo/logo.png"
+                      src="/assets/img/logo/logo_new.png"
                       alt="img"
                       width={80}
                       height={80}
@@ -195,10 +197,9 @@ const Sidebar = ({ toggle, setToggle }) => {
   const router = useRouter();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [routepath, setRoutepath] = useState("");
+  const [userMode, setUserMode] = useState(null); // Guest or LoginUser
 
   const OrderHistory = async () => {
-    setRoutepath("/orderhistory");
-    const auth = getAuth();
     const user = await new Promise((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
         unsubscribe();
@@ -211,11 +212,17 @@ const Sidebar = ({ toggle, setToggle }) => {
     } else {
       router.push("/orderhistory");
     }
+    // try {
+    //   await signOut(auth); // logs out the current user
+    //   localStorage.removeItem("userLog"); // remove any app-specific login flags
+    //   router.push("/"); // redirect to home or login page
+    //   console.log("User logged out successfully");
+    // } catch (error) {
+    //   console.error("Logout error:", error);
+    // }
   };
 
   const MyProfile = async () => {
-    setRoutepath("/orderhistory");
-    const auth = getAuth();
     const user = await new Promise((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
         unsubscribe();
@@ -226,7 +233,7 @@ const Sidebar = ({ toggle, setToggle }) => {
       setShowLoginModal(true);
       return;
     } else {
-      router.push("/orderhistory");
+      router.push("/profile");
     }
   };
 
@@ -254,7 +261,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                 <div className="offcanvas__logo">
                   <Link href="/">
                     <Image
-                      src="/assets/img/logo/logo.png"
+                      src="/assets/img/logo/logo_new.png"
                       alt="logo-img"
                       width={80}
                       height={80}
@@ -344,7 +351,7 @@ const Sidebar = ({ toggle, setToggle }) => {
                     </div>
                     <div className="offcanvas__contact-text">
                       <a target="_blank" rel="noopener noreferrer" href="#">
-                        Open 24 hours | Monday - Sunday
+                        Monday - Sunday  |  6AM - 2AM
                       </a>
                     </div>
                   </li>
@@ -354,14 +361,14 @@ const Sidebar = ({ toggle, setToggle }) => {
                       <i className="bi bi-telephone"></i>
                     </div>
                     <div className="offcanvas__contact-text">
-                      <a href="tel:+11002345909">+11002345909</a>
+                      <a href="tel:240-667-2223">240-667-2223</a>
                     </div>
                   </li>
                 </ul>
 
 
                 <div className="header-button mt-4" style={{ cursor: "pointer" }}>
-                  <div onClick={MyProfile} className="theme-btn">
+                  <div onClick={() => {MyProfile(); setToggle(!toggle);}} className="theme-btn">
                     <span className="button-content-wrapper d-flex align-items-center justify-content-center">
                       <span className="button-icon">
                         <i className="fa-sharp fa-regular fa-cart-shopping bg-transparent text-white me-2"></i>
@@ -385,7 +392,7 @@ const Sidebar = ({ toggle, setToggle }) => {
 
 
                 <div className="header-button mt-4" style={{ cursor: "pointer" }}>
-                  <div onClick={OrderHistory} className="theme-btn">
+                  <div onClick={() => {OrderHistory(); setToggle(!toggle);}} className="theme-btn">
                     <span className="button-content-wrapper d-flex align-items-center justify-content-center">
                       <span className="button-icon">
                         <i className="fa-sharp fa-regular fa-cart-shopping bg-transparent text-white me-2"></i>
